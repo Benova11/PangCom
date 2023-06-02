@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Ball;
+using Game.Scripts;
 using UnityEngine;
 
 namespace Game.Infrastructures.Factories.Balls

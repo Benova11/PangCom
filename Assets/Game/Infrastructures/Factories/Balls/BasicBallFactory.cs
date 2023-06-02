@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Infrastructure.Factories.Balls;
-using Game.Scripts.Ball;
+using Game.Scripts;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

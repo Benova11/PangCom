@@ -2,7 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Scripts.Ball
+namespace Game.Scripts
 {
     public class BallMovementController : IBallMovementController
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -14,6 +15,11 @@ namespace Game.Scripts
         #endregion
 
         #region Methods
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            Destroy(gameObject);
+        }
 
         private void FixedUpdate()
         {

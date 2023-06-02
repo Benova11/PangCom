@@ -13,8 +13,8 @@ TagManager:
   - UI
   - BallCollider
   - PlayerCollider
-  - 
-  - 
+  - ProjectileCollider
+  - Obstacle
   - 
   - 
   - 

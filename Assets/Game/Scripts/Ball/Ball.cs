@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Scripts.Ball
+namespace Game.Scripts
 {
     public abstract class Ball : MonoBehaviour
     {

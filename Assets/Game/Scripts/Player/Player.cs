@@ -1,14 +1,13 @@
-using Game.Infrastructures.Factories.Projectiles;
 using UnityEngine;
 
 namespace Game.Scripts
 {
     public class Player : MonoBehaviour
     {
-        // [SerializeField] private Projectile _projectilePrefab;
         [SerializeField] private Transform _projectileOriginTransform;
         [SerializeField] private Rigidbody2D _rigidBody;
-        private float moveInput;
+        
+        private float _horizontalInput;
         private Weapon _weapon;
 
         private void Start()
@@ -18,10 +17,15 @@ namespace Game.Scripts
 
         private void Update()
         {
-            moveInput = Input.GetAxis("Horizontal");
+            _horizontalInput = Input.GetAxis("Horizontal");
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ShootProjectile();
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                SwitchProjectileType();
             }
         }
 
@@ -29,16 +33,25 @@ namespace Game.Scripts
         {
             _weapon.Shoot();
         }
-        
-        private void SwitchProjectileType(ProjectileType projectileType)
+
+        private void SwitchProjectileType()
         {
-            _weapon.SwitchProjectileType(projectileType);
+            _weapon.SwitchToNextProjectileType();
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            other.collider.gameObject.TryGetComponent(out Ball projectile);
+            if (projectile != null)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void FixedUpdate()
         {
-             moveInput = Input.GetAxis("Horizontal");
-            Vector2 velocity = new Vector2(moveInput * 10, _rigidBody.velocity.y);
+            _horizontalInput = Input.GetAxis("Horizontal");
+            Vector2 velocity = new Vector2(_horizontalInput * 10, _rigidBody.velocity.y);
             _rigidBody.velocity = velocity;
         }
     }
