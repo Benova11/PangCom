@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Game.Infrastructure.Factories.Balls;
 using Game.Scripts.Ball;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Game.Infrastructure.Factories
+namespace Game.Infrastructures.Factories.Balls
 {
     public class BasicBallFactory : IBallFactory<BasicBall>
     {

@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Scripts.Ball;
 using UnityEngine;
 
-namespace Game.Infrastructure.Factories
+namespace Game.Infrastructures.Factories.Balls
 {
     public interface IBallFactory<T> where T : Ball
     {

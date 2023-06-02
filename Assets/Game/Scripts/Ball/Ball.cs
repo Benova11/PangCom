@@ -6,7 +6,6 @@ namespace Game.Scripts.Ball
     {
         #region Editor Components
 
-        [SerializeField] private string _assetKey;
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private Vector2 _initialVelocity;
         [SerializeField] private float _maxVerticalForce = 15f;

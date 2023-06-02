@@ -42,16 +42,16 @@ namespace Game.Scripts.Ball
                 _initialVelocity = new Vector2(direction.x, _initialVelocity.y);
             }
 
-            float currentHeight = _transform.position.y;
-            float maxHeight = 3; // ballType.maxHeight;
+            var currentHeight = _transform.position.y;
+            var maxHeight = 3; // ballType.maxHeight;
 
             if (currentHeight <= maxHeight)
             {
-                float verticalForce = Mathf.Lerp(0f, _maxVerticalForce, 1) * direction.y;
+                var verticalForce = Mathf.Lerp(0f, _maxVerticalForce, 1) * direction.y;
 
-                float horizontalForce = Mathf.Lerp(-_maxHorizontalFactor, _maxHorizontalFactor, 1) * direction.x;
+                var horizontalForce = Mathf.Lerp(-_maxHorizontalFactor, _maxHorizontalFactor, 1) * direction.x;
 
-                Vector2 jumpForce = new Vector2(horizontalForce, verticalForce);
+                var jumpForce = new Vector2(horizontalForce, verticalForce);
                 _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
             }
         }
@@ -68,7 +68,7 @@ namespace Game.Scripts.Ball
 
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                Vector2 contactNormal = contact.normal;
+                var contactNormal = contact.normal;
 
                 direction.x = contactNormal.x switch
                 {

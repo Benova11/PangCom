@@ -1,6 +1,4 @@
-using System;
-using Game.Infrastructure.Factories;
-using Game.Scripts.Ball;
+using Game.Infrastructures.Factories.Balls;
 using UnityEngine;
 
 namespace Game.Infrastructure.Input
@@ -19,7 +17,7 @@ namespace Game.Infrastructure.Input
 
         private void Update()
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
             {
                 _ballFactory.Create(_positions[i]);
                 i++;
