@@ -161,7 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da26af4fba6d84355b9cd558b6068dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialVelocity: {x: 1, y: 5}
   _rigidBody: {fileID: 7063437883307340697}
+  _initialVelocity: {x: 1, y: 5}
   _maxVerticalForce: 6
   _maxHorizontalFactor: 2
+  _transform: {fileID: 1970800471540886113}
+  _spriteRenderer: {fileID: 0}
