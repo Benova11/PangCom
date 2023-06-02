@@ -6,6 +6,7 @@ namespace Game.Scripts.Ball
     {
         #region Editor Components
 
+        [SerializeField] private string _assetKey;
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private Vector2 _initialVelocity;
         [SerializeField] private float _maxVerticalForce = 15f;
@@ -32,6 +33,11 @@ namespace Game.Scripts.Ball
         private void OnCollisionEnter2D(Collision2D collision)
         {
             _ballMovementController.AdjustMovementOnCollision(collision);
+        }
+
+        private void OnDestroy()
+        {
+            _ballMovementController.StopMovement();
         }
 
         #endregion

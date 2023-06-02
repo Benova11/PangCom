@@ -59,6 +59,7 @@ namespace Game.Scripts.Ball
         public void StopMovement()
         {
             _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
         }
 
         private Vector2 GetCollisionDirection(Collision2D collision)

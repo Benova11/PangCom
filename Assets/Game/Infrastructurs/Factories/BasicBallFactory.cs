@@ -1,16 +1,18 @@
+using Cysharp.Threading.Tasks;
 using Game.Scripts.Ball;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Infrastructure.Factories
 {
-    public class BasicBallFactory : MonoBehaviour, IBallFactory<BasicBall>
+    public class BasicBallFactory : IBallFactory<BasicBall>
     {
-        [SerializeField] private BasicBall _ballPrefab;
-
-        public BasicBall Create(Transform position)
+        public async UniTask<BasicBall> Create(Transform position)
         {
-            var ball = Instantiate(_ballPrefab, position.position, Quaternion.identity);
-            return ball;
+            var ballInstance = await Addressables.InstantiateAsync(BallsAddressableKeys.BasicBall, position.position, Quaternion.identity);
+            ballInstance.TryGetComponent(out BasicBall basicBall);
+            
+            return basicBall;
         }
     }
 }
