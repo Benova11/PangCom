@@ -19,7 +19,7 @@ namespace Game.Infrastructure.Input
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
             {
-                _ballFactory.Create(_positions[i], BallType.Basic);
+                _ballFactory.Create(_positions[i], BallType.Basic, BallSize.X5);
                 i++;
                 if (i >= _positions.Length)
                 {

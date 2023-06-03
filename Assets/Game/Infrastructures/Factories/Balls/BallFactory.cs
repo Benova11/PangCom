@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Game.Infrastructure.Factories.Balls;
@@ -9,33 +10,47 @@ namespace Game.Infrastructures.Factories.Balls
 {
     public class BallFactory : IBallFactory
     {
-        public async UniTask<Ball> Create(Transform position, BallType ballType)
+        private BallSize _ballSizeToCreate;
+        private BallType _ballTypeToCreate;
+        private Transform _positionTransform;
+        
+        public async UniTask<Ball> Create(Transform positionTransform, BallType ballType, BallSize ballSize)
         {
-            switch (ballType)
-            {
-                case BallType.Basic:
-                    return await CreateBasicBall(position);
-                case BallType.Small:
-                    return await CreateSmallBall(position);
-                default:
-                    return null;
-            }
+            _ballSizeToCreate = ballSize;
+            _ballTypeToCreate = ballType;
+            _positionTransform = positionTransform;
+            
+            return await HandleBallCreation();
         }
 
-        private async UniTask<Ball> CreateBasicBall(Transform position)
+        private async Task<Ball> HandleBallCreation()
         {
-            var ballInstance = await Addressables.InstantiateAsync(BallsAddressableKeys.BasicBall, position.position, Quaternion.identity);
+            Ball newBall;
+            
+            switch (_ballTypeToCreate)
+            {
+                case BallType.Basic:
+                    newBall = await CreateBasicBall();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (newBall != null)
+            {
+                return newBall;
+            }
+            
+            throw new Exception("Ball instance is null!");
+        }
+
+        private async UniTask<Ball> CreateBasicBall()
+        {
+            var ballAddressableKey = BallsAddressableKeys.BasicBall + _ballSizeToCreate;
+            var ballInstance = await Addressables.InstantiateAsync(ballAddressableKey, _positionTransform.position, Quaternion.identity);
             ballInstance.TryGetComponent(out BasicBall basicBall);
             
             return basicBall;
-        }
-
-        private async UniTask<Ball> CreateSmallBall(Transform position)
-        {
-            var ballInstance = await Addressables.InstantiateAsync(BallsAddressableKeys.SmallBall, position.position, Quaternion.identity);
-            ballInstance.TryGetComponent(out SmallBall smallBall);
-            
-            return smallBall;
         }
     }
 }
