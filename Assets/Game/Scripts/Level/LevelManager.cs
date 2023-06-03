@@ -42,13 +42,19 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimerTick += OnTimerTick;
     }
 
-    private void OnTimerTick(int obj)
+    private void OnTimerTick(int remainingTime)
     {
-        throw new System.NotImplementedException();
+        _levelModel.RemainingTime = remainingTime;
     }
 
     private void OnTimesUp()
     {
         throw new System.NotImplementedException();
+    }
+
+    private void OnDestroy()
+    {
+        _countDownTimer.TimesUp -= OnTimesUp;
+        _countDownTimer.TimerTick -= OnTimerTick;
     }
 }

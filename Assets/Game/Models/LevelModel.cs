@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
@@ -9,6 +10,7 @@ namespace DefaultNamespace
 
         [SerializeField] private string _levelName;
         [SerializeField] private float _currentScore;
+        [FormerlySerializedAs("_currentTime")] [SerializeField] private int _remainingTime;
         [SerializeField] private int _timePerLevelSeconds;
 
         #endregion
@@ -22,6 +24,12 @@ namespace DefaultNamespace
         {
             get => _currentScore;
             set => _currentScore = value;
+        }
+        
+        public int RemainingTime
+        {
+            get => _remainingTime;
+            set => _remainingTime = value;
         }
 
         #endregion
