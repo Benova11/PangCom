@@ -43,6 +43,11 @@ namespace Game.Scripts
             var currentHeight = _transform.position.y;
             var maxHeight = _ballModel.MaxVerticalForce;
 
+            Jump(currentHeight, maxHeight, direction);
+        }
+
+        private void Jump(float currentHeight, float maxHeight, Vector2 direction)
+        {
             if (currentHeight <= maxHeight)
             {
                 var verticalForceRatio = Mathf.Clamp01((maxHeight - currentHeight) / maxHeight);
