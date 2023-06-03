@@ -77,12 +77,15 @@ namespace Game.Scripts
                     _ => direction.x
                 };
 
-                direction.y = contactNormal.y switch
+                if (!collision.collider.CompareTag("Wall"))
                 {
-                    > 0 => 1,
-                    < 0 => -1,
-                    _ => direction.y
-                };
+                    direction.y = contactNormal.y switch
+                    {
+                        > 0 => 1,
+                        < 0 => -1,
+                        _ => direction.y
+                    };
+                }
             }
 
             return direction;

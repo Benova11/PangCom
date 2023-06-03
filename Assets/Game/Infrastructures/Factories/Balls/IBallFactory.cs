@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Game.Infrastructures.Factories.Balls
 {
-    public interface IBallFactory<T> where T : Ball
+    public interface IBallFactory
     {
-        public UniTask<T> Create(Transform position);
+        public UniTask<Ball> Create(Transform position, BallType ballType);
     }
 }

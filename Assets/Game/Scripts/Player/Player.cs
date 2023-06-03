@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts
 {
+    [RequireComponent(typeof(CapsuleCollider2D))]
     public class Player : MonoBehaviour
     {
         [SerializeField] private Transform _projectileOriginTransform;
@@ -44,7 +45,7 @@ namespace Game.Scripts
             other.collider.gameObject.TryGetComponent(out Ball projectile);
             if (projectile != null)
             {
-                Destroy(gameObject);
+                // Destroy(gameObject);
             }
         }
 

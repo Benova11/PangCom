@@ -27,6 +27,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 704163c2bb07941a580227dec4544a79
+    m_Address: Assets/Prefabs/ProjectileSmall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 675902d65eceb4f8a826b35b66b2643d
+    m_Address: Assets/Prefabs/SmallBall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820c6360648414afe8182bc1492d5049, type: 2}
   m_SchemaSet:

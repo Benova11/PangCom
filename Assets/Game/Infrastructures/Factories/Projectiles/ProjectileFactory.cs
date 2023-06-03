@@ -9,13 +9,6 @@ namespace Game.Infrastructures.Factories.Projectiles
 {
     public class ProjectileFactory : IProjectileFactory
     {
-        private ProjectilesPool _projectilesPool;
-        
-        public ProjectileFactory()
-        {
-            _projectilesPool = new ProjectilesPool();
-        }
-        
         public async UniTask<Scripts.Projectile> Create(Transform position, ProjectileType projectileType)
         {
             switch (projectileType)
@@ -23,7 +16,7 @@ namespace Game.Infrastructures.Factories.Projectiles
                 case ProjectileType.Basic:
                     return await CreateBasicProjectile(position);
                 case ProjectileType.Rope:
-                return await CreateSmallProjectile(position);
+                    return await CreateSmallProjectile(position);
                 default:
                     return null;
             }

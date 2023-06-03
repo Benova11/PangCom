@@ -3,15 +3,19 @@ using UnityEngine;
 
 namespace Game.Scripts
 {
+    [RequireComponent(typeof(Collider2D))]
     public abstract class Projectile : MonoBehaviour
     {
         #region Editor Components
 
-        //todo oncollision
-        //todo projectile factory
-        //todo projectile pool
         [SerializeField] private Rigidbody2D _rigidBody;
-        
+
+        #endregion
+
+        #region Events
+
+        public event Action<Projectile> Collided;
+
         #endregion
 
         #region Methods

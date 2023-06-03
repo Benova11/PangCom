@@ -5,21 +5,21 @@ namespace Game.Infrastructure.Input
 {
     public class InputSystem : MonoBehaviour
     {
-        private BasicBallFactory _ballFactory;
+        private BallFactory _ballFactory;
         [SerializeField] private Transform[] _positions;
 
         private int i;
 
         private void Start()
         {
-            _ballFactory = new BasicBallFactory();
+            _ballFactory = new BallFactory();
         }
 
         private void Update()
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
             {
-                _ballFactory.Create(_positions[i]);
+                _ballFactory.Create(_positions[i], BallType.Basic);
                 i++;
                 if (i >= _positions.Length)
                 {

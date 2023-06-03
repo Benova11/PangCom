@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2176221588673176572}
   - component: {fileID: 4836273935301119087}
   m_Layer: 6
-  m_Name: Ball
+  m_Name: BasicBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 7063437883307340697}
-  _initialVelocity: {x: 1, y: 5}
-  _maxVerticalForce: 6
-  _maxHorizontalFactor: 2
+  _initialVelocity: {x: 2, y: 7}
+  _maxVerticalForce: 8
+  _maxHorizontalFactor: 3
   _transform: {fileID: 1970800471540886113}
   _spriteRenderer: {fileID: 0}
