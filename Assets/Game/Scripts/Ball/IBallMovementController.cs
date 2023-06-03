@@ -1,3 +1,4 @@
+using Game.Configs.Balls;
 using Game.Models;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Game.Scripts
     {
         void StopMovement();
         void AdjustMovementOnCollision(Collision2D collision);
-        void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel);
+        void SetHorizontalOrientation(BallHorizontalDirection direction);
+        void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel, BallHorizontalDirection horizontalOrientation);
     }
 }

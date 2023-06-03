@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Configs.Balls;
+using Game.Events;
 using Game.Models;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Game.Scripts
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] protected Transform _transform;
         [SerializeField] protected BallModel _ballModel;
-
+        [SerializeField] protected BallHorizontalDirection _horizontalOrientation = BallHorizontalDirection.Right;
         #endregion
 
         #region Fields
@@ -23,15 +24,21 @@ namespace Game.Scripts
 
         #region Methods
 
-        private void Start()
+        private void Awake()
         {
             _ballMovementController = new BallMovementController();
-            _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel);
         }
 
-        public void SetInitialHorizontalDirection(BallHorizontalDirection direction)
+        private void Start()
         {
-            _ballModel.HorizontalDirection = direction;
+            SetBallMovement(_horizontalOrientation);
+        }
+
+        public void SetBallMovement(BallHorizontalDirection direction)
+        {
+            _horizontalOrientation = direction;
+            _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel, _horizontalOrientation);
+            _ballMovementController.SetHorizontalOrientation(direction);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -47,6 +54,8 @@ namespace Game.Scripts
 
         private async UniTaskVoid OnProjectileHit()
         {
+            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyEventArgs(_transform));
+            
             if (_ballModel.BallSize == BallSize.X1)
             {
                 Destroy(gameObject);
@@ -55,7 +64,6 @@ namespace Game.Scripts
             {
                 _rigidBody.gameObject.SetActive(false);
                 _transform.localScale = Vector3.zero;
-
                 await SplitBall();
 
                 Destroy(gameObject);

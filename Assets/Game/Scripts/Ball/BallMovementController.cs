@@ -8,27 +8,39 @@ namespace Game.Scripts
 {
     public class BallMovementController : IBallMovementController
     {
+        #region Fields
+
         private BallModel _ballModel;
         private Transform _transform;
         private Rigidbody2D _rigidBody;
+        private BallHorizontalDirection _horizontalOrientation;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel)
+        #endregion
+
+        #region Methods
+
+        public void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel, BallHorizontalDirection horizontalOrientation)
         {
             _ballModel = ballModel;
             _transform = transform;
             _rigidBody = rigidBody;
-            
+            _horizontalOrientation = horizontalOrientation;
             _cancellationTokenSource = new CancellationTokenSource();
-            
+
             UpdateBodyVelocity();
+        }
+        
+        public void SetHorizontalOrientation(BallHorizontalDirection direction)
+        {
+            _horizontalOrientation = direction;
         }
 
         private async UniTask UpdateBodyVelocity()
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
-                _rigidBody.velocity = new Vector2(_ballModel.InitialVelocity.x * (int)_ballModel.HorizontalDirection, _rigidBody.velocity.y);
+                _rigidBody.velocity = new Vector2(_ballModel.InitialVelocity.x * (int)_horizontalOrientation, _rigidBody.velocity.y);
                 await UniTask.Yield();
             }
         }
@@ -38,7 +50,7 @@ namespace Game.Scripts
             var direction = GetCollisionDirection(collision);
             if (direction.x != 0)
             {
-                _ballModel.HorizontalDirection = (BallHorizontalDirection)direction.x;
+                _horizontalOrientation = (BallHorizontalDirection)direction.x;
             }
 
             var currentHeight = _transform.position.y;
@@ -95,5 +107,7 @@ namespace Game.Scripts
 
             return direction;
         }
+
+        #endregion
     }
 }

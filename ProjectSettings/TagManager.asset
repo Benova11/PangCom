@@ -12,12 +12,12 @@ TagManager:
   - 
   - Water
   - UI
-  - BallCollider
-  - PlayerCollider
-  - ProjectileCollider
+  - Ball
+  - Player
+  - Projectile
   - Obstacle
-  - 
-  - 
+  - Border
+  - Collectable
   - 
   - 
   - 

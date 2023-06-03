@@ -1,5 +1,6 @@
 using Game.Configs.Balls;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Models
 {
@@ -27,7 +28,6 @@ namespace Game.Models
 
         public BallSize BallSize => _ballSize;
         public BallType BallType => _ballType;
-        public BallHorizontalDirection HorizontalDirection { get; set; } = BallHorizontalDirection.Right;
         public Vector2 InitialVelocity => _initialVelocity;
         public float MaxVerticalJumpHeight => _maxVerticalJumpHeight;
         public float MaxHorizontalJumpHeight => _maxHorizontalJumpHeight;

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Projectile;
 using Game.Scripts;
@@ -9,7 +8,7 @@ namespace Game.Infrastructures.Factories.Projectiles
 {
     public class ProjectileFactory : IProjectileFactory
     {
-        public async UniTask<Scripts.Projectile> Create(Transform position, ProjectileType projectileType)
+        public async UniTask<Projectile> Create(Transform position, ProjectileType projectileType)
         {
             switch (projectileType)
             {
@@ -22,7 +21,7 @@ namespace Game.Infrastructures.Factories.Projectiles
             }
         }
 
-        private async Task<Scripts.Projectile> CreateSmallProjectile(Transform shootingPoint)
+        private async UniTask<Projectile> CreateSmallProjectile(Transform shootingPoint)
         {
             var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.SmallProjectile, shootingPoint.position, Quaternion.identity);
             projectileInstance.TryGetComponent(out SmallProjectile smallProjectile);
@@ -30,7 +29,7 @@ namespace Game.Infrastructures.Factories.Projectiles
             return smallProjectile;
         }
 
-        private async UniTask<Scripts.Projectile> CreateBasicProjectile(Transform shootingPoint)
+        private async UniTask<Projectile> CreateBasicProjectile(Transform shootingPoint)
         {
             var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.BasicProjectile, shootingPoint.position, Quaternion.identity);
             projectileInstance.TryGetComponent(out BasicProjectile basicProjectile);

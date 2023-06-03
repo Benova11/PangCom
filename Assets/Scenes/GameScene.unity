@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 316773460}
   - component: {fileID: 316773459}
   - component: {fileID: 316773458}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: RightWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 730752744}
   - component: {fileID: 730752743}
   - component: {fileID: 730752742}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ProjectileStopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,6 +692,7 @@ Transform:
   m_Children:
   - {fileID: 836048365}
   - {fileID: 526254889}
+  - {fileID: 924515263}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -744,6 +745,52 @@ Transform:
   m_Father: {fileID: 796146685}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &924515262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 924515263}
+  - component: {fileID: 924515264}
+  m_Layer: 0
+  m_Name: CollectableManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &924515263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924515262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 796146685}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &924515264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924515262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccc63a6d8244f4bb305301d59802545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelModel: {fileID: 11400000, guid: fc88858a75a154158b40dd00f347afad, type: 2}
+  _scoreRewardPrefab: {fileID: 2723741181200670406, guid: 2f64dda79dbcb4725a0da5a37086e1f6, type: 3}
 --- !u!1 &1016177916
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +802,7 @@ GameObject:
   - component: {fileID: 1016177919}
   - component: {fileID: 1016177918}
   - component: {fileID: 1016177917}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: LeftWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -923,11 +970,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1222677700557915137, guid: e09dcbd4c5d1840589fa697f051489d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.17
+      value: 3.994
       objectReference: {fileID: 0}
     - target: {fileID: 1222677700557915137, guid: e09dcbd4c5d1840589fa697f051489d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9
+      value: -2.503
       objectReference: {fileID: 0}
     - target: {fileID: 1477375791719175921, guid: e09dcbd4c5d1840589fa697f051489d4, type: 3}
       propertyPath: m_IsActive
@@ -1001,6 +1048,10 @@ PrefabInstance:
       propertyPath: _ballModel
       value: 
       objectReference: {fileID: 11400000, guid: 03bdba7c1968845989ef7d0a7839f8c6, type: 2}
+    - target: {fileID: 8808538218396522744, guid: e09dcbd4c5d1840589fa697f051489d4, type: 3}
+      propertyPath: _horizontalOrientation
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2039556331120814317, guid: e09dcbd4c5d1840589fa697f051489d4, type: 3}
@@ -1023,7 +1074,7 @@ GameObject:
   - component: {fileID: 1838851258}
   - component: {fileID: 1838851257}
   - component: {fileID: 1838851256}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1207,11 +1258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256993289801038995, guid: 944cb8ce90ff3466781d4a20e99641be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.475
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 6256993289801038995, guid: 944cb8ce90ff3466781d4a20e99641be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6256993289801038995, guid: 944cb8ce90ff3466781d4a20e99641be, type: 3}
       propertyPath: m_LocalRotation.w
