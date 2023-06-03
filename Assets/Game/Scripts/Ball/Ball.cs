@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Infrastructures.Factories.Balls;
+using Game.Models;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -9,12 +10,8 @@ namespace Game.Scripts
         #region Editor Components
 
         [SerializeField] private Rigidbody2D _rigidBody;
-        [SerializeField] private Vector2 _initialVelocity;
-        [SerializeField] private float _maxVerticalForce = 15f;
-        [SerializeField] private float _maxHorizontalFactor = 0.5f;
-        [SerializeField] private BallSize _ballSize;
-        [SerializeField] private BallType _ballType;
         [SerializeField] protected Transform _transform;
+        [SerializeField] protected BallModel _ballModel;
 
         #endregion
 
@@ -29,20 +26,20 @@ namespace Game.Scripts
         private void Start()
         {
             _ballMovementController = new BallMovementController();
-            _ballMovementController.InitializeMovement(_transform, _rigidBody, _initialVelocity, _maxVerticalForce, _maxHorizontalFactor);
+            _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel);
         }
-        
-        public void SetHorizontalDirection(int direction)
+
+        public void SetInitialHorizontalDirection(int direction)
         {
-            _initialVelocity = new Vector2(_initialVelocity.x * direction, _initialVelocity.y);
+            _ballModel.HorizontalDirection = direction;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             _ballMovementController.AdjustMovementOnCollision(collision);
             collision.collider.TryGetComponent(out Projectile projectile);
-            
-            if(projectile != null)
+
+            if (projectile != null)
             {
                 OnProjectileHit();
             }
@@ -50,19 +47,27 @@ namespace Game.Scripts
 
         private async UniTaskVoid OnProjectileHit()
         {
-            if(_ballSize == BallSize.X1)
+            if (_ballModel.BallSize == BallSize.X1)
             {
                 Destroy(gameObject);
             }
             else
             {
                 _rigidBody.gameObject.SetActive(false);
-                transform.localScale = Vector3.zero;
-                var newBallsSize = --_ballSize;
-                var ballSplitter = new BallSplitter();
-                await ballSplitter.Split(_transform, _ballType, newBallsSize);
+                _transform.localScale = Vector3.zero;
+
+                await SplitBall();
+
                 Destroy(gameObject);
             }
+        }
+
+        private async UniTask SplitBall()
+        {
+            var newBallsSize = _ballModel.BallSize - 1;
+            var ballSplitter = new BallSplitter();
+
+            await ballSplitter.Split(_transform, _ballModel.BallType, newBallsSize);
         }
 
         private void OnDestroy()

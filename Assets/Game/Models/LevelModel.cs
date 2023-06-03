@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace DefaultNamespace
+namespace Game.Models
 {
     [CreateAssetMenu(fileName = "LevelModel", menuName = "Models/LevelModel")]
     public class LevelModel : ScriptableObject

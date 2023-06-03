@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DefaultNamespace;
+using Game.Models;
 using Game.Scripts;
 using UnityEngine;
 using Utils.Timer;

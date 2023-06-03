@@ -1,3 +1,4 @@
+using Game.Models;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -6,6 +7,6 @@ namespace Game.Scripts
     {
         void StopMovement();
         void AdjustMovementOnCollision(Collision2D collision);
-        void InitializeMovement(Transform transform, Rigidbody2D rigidBody, Vector2 initialVelocity, float maxVerticalForce, float maxHorizontalFactor);
+        void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel);
     }
 }

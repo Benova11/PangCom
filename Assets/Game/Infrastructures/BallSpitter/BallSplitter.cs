@@ -17,7 +17,7 @@ public class BallSplitter : IBallSplitter
         for (var i = 0; i < 2; i++)
         {
             var ball = await _ballFactory.Create(positionToSpawn, ballType, ballSize);
-            ball.SetHorizontalDirection(i == 0 ? -1 : 1);
+            ball.SetInitialHorizontalDirection(i == 0 ? -1 : 1);
         }
     }
 }
