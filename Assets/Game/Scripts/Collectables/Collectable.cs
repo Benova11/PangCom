@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Collectables
 {
+    [RequireComponent(typeof(Collider2D))]
     public abstract class Collectable<T> : MonoBehaviour
     {
         public abstract T Content { get; set; }

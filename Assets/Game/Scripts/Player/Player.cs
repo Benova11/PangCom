@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CapsuleCollider2D))]
     public class Player : MonoBehaviour
     {
@@ -26,18 +27,28 @@ namespace Game.Scripts
             _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform), 2); //todo change constant 3
         }
 
+        private void FixedUpdate()
+        {
+            Move(InputManager.GetMovementInput());
+        }
+
         private void Update()
         {
-            _horizontalInput = Input.GetAxis("Horizontal");
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (InputManager.IsShootRequested())
             {
                 ShootProjectile();
             }
 
-            if (Input.GetKeyDown(KeyCode.RightControl))
+            if (InputManager.IsSwitchWeaponRequested())
             {
                 SwitchProjectileType();
             }
+        }
+
+        private void Move(float horizontalInput)
+        {
+            Vector2 velocity = new Vector2(horizontalInput * 10, _rigidBody.velocity.y);
+            _rigidBody.velocity = velocity;
         }
 
         private void ShootProjectile()
@@ -57,13 +68,6 @@ namespace Game.Scripts
             {
                 // Destroy(gameObject);
             }
-        }
-
-        private void FixedUpdate()
-        {
-            _horizontalInput = Input.GetAxis("Horizontal");
-            Vector2 velocity = new Vector2(_horizontalInput * 10, _rigidBody.velocity.y);
-            _rigidBody.velocity = velocity;
         }
 
         #endregion
