@@ -162,10 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 7063437883307340697}
-  _initialVelocity: {x: 2, y: 7}
-  _maxVerticalForce: 8
-  _maxHorizontalFactor: 3
-  _ballSize: 3
-  _ballType: 0
   _transform: {fileID: 1970800471540886113}
+  _ballModel: {fileID: 11400000, guid: 03bdba7c1968845989ef7d0a7839f8c6, type: 2}
   _spriteRenderer: {fileID: 0}

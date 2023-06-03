@@ -10,10 +10,10 @@ namespace Game.Models
 
         [SerializeField] private BallSize _ballSize;
         [SerializeField] private BallType _ballType;
-        [SerializeField] [Range(1, 10)] private float _maxVerticalForce;
-        [SerializeField] [Range(1, 5)] private float _maxHorizontalFactor;
-        [SerializeField] [Range(1, 10)] private float _initialVerticalVelocity;
-        [SerializeField] [Range(1, 10)] private float _initialHorizontalVelocity;
+        [SerializeField] [Range(1, 10)] private float _maxVerticalForce = 1;
+        [SerializeField] [Range(1, 5)] private float _maxHorizontalFactor = 1;
+        [SerializeField] [Range(1, 10)] private float _initialVerticalVelocity = 1;
+        [SerializeField] [Range(1, 10)] private float _initialHorizontalVelocity = 1;
 
         #endregion
 
@@ -34,8 +34,8 @@ namespace Game.Models
 
         #endregion
 
-        #region Meth
-
+        #region Methods
+        
         private void OnValidate()
         {
             _initialVelocity = new Vector2(_initialHorizontalVelocity, _initialVerticalVelocity);

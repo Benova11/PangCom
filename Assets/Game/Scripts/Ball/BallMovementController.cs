@@ -41,11 +41,12 @@ namespace Game.Scripts
             }
 
             var currentHeight = _transform.position.y;
-            var maxHeight = 3; // ballType.maxHeight;
+            var maxHeight = _ballModel.MaxVerticalForce;
 
             if (currentHeight <= maxHeight)
             {
-                var verticalForce = Mathf.Lerp(0f, _ballModel.MaxVerticalForce, 1) * direction.y;
+                var verticalForceRatio = Mathf.Clamp01((maxHeight - currentHeight) / maxHeight);
+                var verticalForce = Mathf.Lerp(0f, _ballModel.MaxVerticalForce, verticalForceRatio) * direction.y;
 
                 var horizontalForce = Mathf.Lerp(-_ballModel.MaxHorizontalFactor, _ballModel.MaxHorizontalFactor, 1) * direction.x;
 
