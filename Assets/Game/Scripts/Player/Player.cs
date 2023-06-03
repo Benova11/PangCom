@@ -5,13 +5,21 @@ namespace Game.Scripts
     [RequireComponent(typeof(CapsuleCollider2D))]
     public class Player : MonoBehaviour
     {
-        [SerializeField] private Transform _projectileOriginTransform;
-        [SerializeField] private Rigidbody2D _rigidBody;
-        
-        private float _horizontalInput;
+        #region Editor Components
 
+        [SerializeField] private Rigidbody2D _rigidBody;
+        [SerializeField] private Transform _projectileOriginTransform;
+
+        #endregion
+
+        #region Fields
+
+        private float _horizontalInput;
         private WeaponManager _weaponManager;
-        // private Weapon _weapon;
+
+        #endregion
+
+        #region Methods
 
         private void Start()
         {
@@ -57,5 +65,7 @@ namespace Game.Scripts
             Vector2 velocity = new Vector2(_horizontalInput * 10, _rigidBody.velocity.y);
             _rigidBody.velocity = velocity;
         }
+
+        #endregion
     }
 }
