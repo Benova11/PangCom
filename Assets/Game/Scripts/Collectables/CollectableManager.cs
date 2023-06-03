@@ -17,7 +17,6 @@ namespace Game.Scripts.Collectables
         #region Fields
         
         private RewardsFactory _rewardsFactory;
-        // private ICollectableFactory<RewardsFactory> _rewardsFactory;
 
         #endregion
 
@@ -27,7 +26,7 @@ namespace Game.Scripts.Collectables
         {
             CreateFactories();
             GameplayEventBus<GameplayEventType,DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
-            GameplayEventBus<CollectableEventType,CollectableEventArgs>.Subscribe(CollectableEventType.RewardCollected, OnRewardCollected);
+            GameplayEventBus<CollectableEventType,CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         }
         
         private void CreateFactories()
@@ -38,14 +37,15 @@ namespace Game.Scripts.Collectables
         private async void OnBallDestroyed(DestroyEventArgs args)
         {
             var scoreReward = await _rewardsFactory.Create(args.OriginTransform, RewardType.Score);
-            scoreReward.Content = 10;
-            // var scoreReward = Instantiate(_scoreRewardPrefab, args.OriginTransform, Quaternion.identity);
-            // scoreReward = 10;
+            scoreReward.Content = new RewardContent
+            {
+                Amount = 10
+            };
         }
         
-        private void OnRewardCollected(CollectableEventArgs args)
+        private void OnRewardCollected(CollectableEventContent<RewardContent> content)
         {
-            _levelModel.CurrentScore += args.Amount;
+            _levelModel.CurrentScore += content.Args.Amount;
         }
 
         private void OnDestroy()

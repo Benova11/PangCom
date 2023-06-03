@@ -1,11 +1,12 @@
+using Game.Configs.Collectable;
 using Game.Events;
 using UnityEngine;
 
 namespace Game.Scripts.Collectables.Rewards
 {
-    public class ScoreReward : Collectable<int>
+    public class ScoreReward : Collectable<RewardContent>
     {
-        public override int Content { get; set; }
+        public override RewardContent Content { get; set; }
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
@@ -13,7 +14,7 @@ namespace Game.Scripts.Collectables.Rewards
             
             if (player != null)
             {
-                GameplayEventBus<CollectableEventType, CollectableEventArgs>.Publish(CollectableEventType.RewardCollected, new CollectableEventArgs(Content));
+                GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Publish(CollectableEventType.RewardCollected, new CollectableEventContent<RewardContent>(Content));
                 Destroy(gameObject);
             }
         }

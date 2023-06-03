@@ -8,9 +8,9 @@ using UnityEngine.AddressableAssets;
 
 namespace DefaultNamespace
 {
-    public class RewardsFactory : ICollectableFactory<RewardType, int>
+    public class RewardsFactory : ICollectableFactory<RewardType, RewardContent>
     {
-        public async UniTask<Collectable<int>> Create(Transform position, RewardType collectableType)
+        public async UniTask<Collectable<RewardContent>> Create(Transform position, RewardType collectableType)
         {
             switch (collectableType)
             {
