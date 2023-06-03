@@ -9,11 +9,13 @@ namespace Game.Scripts
         [SerializeField] private Rigidbody2D _rigidBody;
         
         private float _horizontalInput;
-        private Weapon _weapon;
+
+        private WeaponManager _weaponManager;
+        // private Weapon _weapon;
 
         private void Start()
         {
-            _weapon = new Weapon(_projectileOriginTransform);
+            _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform), 2); //todo change constant 3
         }
 
         private void Update()
@@ -32,12 +34,12 @@ namespace Game.Scripts
 
         private void ShootProjectile()
         {
-            _weapon.Shoot();
+            _weaponManager.Weapon.Shoot();
         }
 
         private void SwitchProjectileType()
         {
-            _weapon.SwitchToNextProjectileType();
+            _weaponManager.SwitchToNextProjectileType();
         }
 
         private void OnCollisionEnter2D(Collision2D other)

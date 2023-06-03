@@ -6,15 +6,14 @@ using UnityEngine;
 
 namespace Game.Scripts
 {
-    public class Weapon
+    public class Weapon : IWeapon
     {
         #region Fields
 
         private readonly Transform _shootingPoint;
-        private readonly int _projectileTypesCount;
         private readonly IProjectileFactory _projectileFactory;
 
-        private int _currentProjectileTypeIndex;
+        private ProjectileType _currentProjectileType = ProjectileType.Basic;
 
         #endregion
 
@@ -24,18 +23,16 @@ namespace Game.Scripts
         {
             _shootingPoint = shootingPoint;
             _projectileFactory = new ProjectileFactory();
-
-            _projectileTypesCount = Enum.GetValues(typeof(ProjectileType)).Length;
         }
 
         public async UniTask Shoot()
         {
-            await _projectileFactory.Create(_shootingPoint, (ProjectileType)_currentProjectileTypeIndex);
+            await _projectileFactory.Create(_shootingPoint, _currentProjectileType);
         }
 
-        public void SwitchToNextProjectileType()
+        public void SwitchToNextProjectileType(ProjectileType projectileType)
         {
-            _currentProjectileTypeIndex = (_currentProjectileTypeIndex + 1) % _projectileTypesCount;
+            _currentProjectileType = projectileType;
         }
 
         #endregion

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e195ac9fc94624afb85b34db86f8bf, type: 3}
   m_Name: BasicBallX3Model
   m_EditorClassIdentifier: 
-  _ballSize: 3
+  _ballSize: 2
   _ballType: 0
   _maxVerticalJumpHeight: 10
   _maxHorizontalJumpHeight: 2.68
