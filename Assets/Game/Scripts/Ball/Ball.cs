@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Game.Infrastructures.Factories.Balls;
+using Game.Configs.Balls;
 using Game.Models;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace Game.Scripts
             _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel);
         }
 
-        public void SetInitialHorizontalDirection(int direction)
+        public void SetInitialHorizontalDirection(BallHorizontalDirection direction)
         {
             _ballModel.HorizontalDirection = direction;
         }

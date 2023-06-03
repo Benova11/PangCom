@@ -1,4 +1,4 @@
-namespace Game.Infrastructures.Factories.Balls
+namespace Game.Configs.Balls
 {
     public enum BallSize
     {

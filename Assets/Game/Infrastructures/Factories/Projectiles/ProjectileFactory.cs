@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Game.Infrastructures.Factories.Projectile;
+using Game.Configs.Projectile;
 using Game.Scripts;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

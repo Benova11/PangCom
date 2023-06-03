@@ -1,4 +1,4 @@
-namespace Game.Infrastructures.Factories.Projectiles
+namespace Game.Configs.Projectile
 {
     public enum ProjectileType
     {

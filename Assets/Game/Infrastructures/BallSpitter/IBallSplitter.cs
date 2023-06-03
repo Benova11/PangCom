@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Game.Infrastructures.Factories.Balls;
+using Game.Configs.Balls;
 using UnityEngine;
 
 namespace Game.Infrastructures.BallSpawners

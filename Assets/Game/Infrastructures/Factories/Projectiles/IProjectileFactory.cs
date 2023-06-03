@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Configs.Projectile;
 using UnityEngine;
 
 namespace Game.Infrastructures.Factories.Projectiles

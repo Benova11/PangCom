@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Game.Configs.Projectile;
 using Game.Infrastructures.Factories.Projectiles;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-using Game.Infrastructures.Factories.Balls;
+using Game.Configs.Balls;
 using UnityEngine;
 
 namespace Game.Models
@@ -10,8 +10,8 @@ namespace Game.Models
 
         [SerializeField] private BallSize _ballSize;
         [SerializeField] private BallType _ballType;
-        [SerializeField] [Range(1, 10)] private float _maxVerticalForce = 1;
-        [SerializeField] [Range(1, 5)] private float _maxHorizontalFactor = 1;
+        [SerializeField] [Range(1, 10)] private float _maxVerticalJumpHeight = 1;
+        [SerializeField] [Range(1, 5)] private float _maxHorizontalJumpHeight = 1;
         [SerializeField] [Range(1, 10)] private float _initialVerticalVelocity = 1;
         [SerializeField] [Range(1, 10)] private float _initialHorizontalVelocity = 1;
 
@@ -27,15 +27,15 @@ namespace Game.Models
 
         public BallSize BallSize => _ballSize;
         public BallType BallType => _ballType;
-        public int HorizontalDirection { get; set; } = 1;
+        public BallHorizontalDirection HorizontalDirection { get; set; } = BallHorizontalDirection.Right;
         public Vector2 InitialVelocity => _initialVelocity;
-        public float MaxVerticalForce => _maxVerticalForce;
-        public float MaxHorizontalFactor => _maxHorizontalFactor;
+        public float MaxVerticalJumpHeight => _maxVerticalJumpHeight;
+        public float MaxHorizontalJumpHeight => _maxHorizontalJumpHeight;
 
         #endregion
 
         #region Methods
-        
+
         private void OnValidate()
         {
             _initialVelocity = new Vector2(_initialHorizontalVelocity, _initialVerticalVelocity);

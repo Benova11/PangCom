@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Configs.Balls;
 using Game.Infrastructures.BallSpawners;
 using Game.Infrastructures.Factories.Balls;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class BallSplitter : IBallSplitter
         for (var i = 0; i < 2; i++)
         {
             var ball = await _ballFactory.Create(positionToSpawn, ballType, ballSize);
-            ball.SetInitialHorizontalDirection(i == 0 ? -1 : 1);
+            ball.SetInitialHorizontalDirection(i == 0 ? BallHorizontalDirection.Left : BallHorizontalDirection.Right);
         }
     }
 }

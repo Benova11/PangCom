@@ -1,4 +1,4 @@
-namespace Game.Infrastructures.Factories.Projectile
+namespace Game.Configs.Projectile
 {
     public static class ProjectilesAddressableKeys
     {

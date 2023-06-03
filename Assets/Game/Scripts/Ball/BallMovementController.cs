@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Game.Configs.Balls;
 using Game.Models;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace Game.Scripts
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
-                _rigidBody.velocity = new Vector2(_ballModel.InitialVelocity.x * _ballModel.HorizontalDirection, _rigidBody.velocity.y);
+                _rigidBody.velocity = new Vector2(_ballModel.InitialVelocity.x * (int)_ballModel.HorizontalDirection, _rigidBody.velocity.y);
                 await UniTask.Yield();
             }
         }
@@ -37,11 +38,11 @@ namespace Game.Scripts
             var direction = GetCollisionDirection(collision);
             if (direction.x != 0)
             {
-                _ballModel.HorizontalDirection = (int)direction.x;
+                _ballModel.HorizontalDirection = (BallHorizontalDirection)direction.x;
             }
 
             var currentHeight = _transform.position.y;
-            var maxHeight = _ballModel.MaxVerticalForce;
+            var maxHeight = _ballModel.MaxVerticalJumpHeight;
 
             Jump(currentHeight, maxHeight, direction);
         }
@@ -51,9 +52,9 @@ namespace Game.Scripts
             if (currentHeight <= maxHeight)
             {
                 var verticalForceRatio = Mathf.Clamp01((maxHeight - currentHeight) / maxHeight);
-                var verticalForce = Mathf.Lerp(0f, _ballModel.MaxVerticalForce, verticalForceRatio) * direction.y;
+                var verticalForce = Mathf.Lerp(0f, _ballModel.MaxVerticalJumpHeight, verticalForceRatio) * direction.y;
 
-                var horizontalForce = Mathf.Lerp(-_ballModel.MaxHorizontalFactor, _ballModel.MaxHorizontalFactor, 1) * direction.x;
+                var horizontalForce = Mathf.Lerp(-_ballModel.MaxHorizontalJumpHeight, _ballModel.MaxHorizontalJumpHeight, 1) * direction.x;
 
                 var jumpForce = new Vector2(horizontalForce, verticalForce);
                 _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);

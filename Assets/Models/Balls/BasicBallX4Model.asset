@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballSize: 3
   _ballType: 0
-  _maxVerticalForce: 9.3
-  _maxHorizontalFactor: 3.44
+  _maxVerticalJumpHeight: 2.73
+  _maxHorizontalJumpHeight: 2.68
   _initialVerticalVelocity: 3.32
   _initialHorizontalVelocity: 5.57

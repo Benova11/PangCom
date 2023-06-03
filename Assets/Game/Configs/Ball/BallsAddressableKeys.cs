@@ -1,4 +1,4 @@
-namespace Game.Infrastructure.Factories.Balls
+namespace Game.Configs.Balls
 {
     public static class BallsAddressableKeys
     {
