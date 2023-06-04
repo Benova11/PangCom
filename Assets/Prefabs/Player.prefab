@@ -161,5 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20aba63a7d5c4ead8175b5905af0d937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileOriginTransform: {fileID: 0}
   _rigidBody: {fileID: 7854002521986331338}
+  _projectileOriginTransform: {fileID: 0}

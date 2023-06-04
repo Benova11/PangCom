@@ -12,7 +12,7 @@ namespace Game
 
         private const KeyCode SHOOT_REQUEST_BUTTON = KeyCode.Space;
 
-        private const KeyCode SWITCH_WEAPON_REQUEST_BUTTON = KeyCode.LeftControl;
+        private const KeyCode SWITCH_WEAPON_REQUEST_BUTTON = KeyCode.RightControl;
 
         #endregion
 

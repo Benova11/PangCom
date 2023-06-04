@@ -15,7 +15,6 @@ namespace Game.Scripts
 
         #region Fields
 
-        private float _horizontalInput;
         private WeaponManager _weaponManager;
 
         #endregion

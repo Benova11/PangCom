@@ -1,6 +1,5 @@
 using Game.Configs.Balls;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Models
 {

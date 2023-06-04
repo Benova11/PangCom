@@ -31,6 +31,7 @@ namespace DefaultNamespace
             return scoreReward;
         }
 
+        //todo?
         // private async UniTask<Projectile> CreateHealthReward(Transform shootingPoint)
         // {
         //     var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.BasicProjectile, shootingPoint.position, Quaternion.identity);
