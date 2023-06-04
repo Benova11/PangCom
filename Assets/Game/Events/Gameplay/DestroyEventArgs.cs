@@ -6,13 +6,16 @@ namespace Game.Events
 {
     public class DestroyEventArgs : EventArgs
     {
-        public readonly Transform OriginTransform;
-        public readonly Ball Ball;
+        private readonly Ball _ball;
+        private readonly Transform _originTransform;
+        
+        public Ball Ball => _ball;
+        public Transform OriginTransform => _originTransform;
         
         public DestroyEventArgs(Transform originTransform, Ball ball)
         {
-            Ball = ball;
-            OriginTransform = originTransform;
+            _ball = ball;
+            _originTransform = originTransform;
         }
     }
 }

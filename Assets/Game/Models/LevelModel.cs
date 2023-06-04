@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Models
 {
@@ -7,20 +6,21 @@ namespace Game.Models
     public class LevelModel : ScriptableObject
     {
         #region Editor Compon
-
-        [SerializeField] private string _levelName;
-        [SerializeField] private float _currentScore;
-        [FormerlySerializedAs("_currentTime")] [SerializeField] private int _remainingTime;
+        
+        [SerializeField] private int _levelIndex;
+        [SerializeField] private int _currentScore;
+        [SerializeField] private int _remainingTime;
         [SerializeField] private int _timePerLevelSeconds;
 
         #endregion
 
         #region Properties
 
-        public string LevelName => _levelName;
+        public int LevelIndex => _levelIndex;
+        
         public int TimePerLevel => _timePerLevelSeconds;
 
-        public float CurrentScore
+        public int CurrentScore
         {
             get => _currentScore;
             set => _currentScore = value;

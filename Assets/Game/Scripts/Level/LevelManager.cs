@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Configs.Balls;
+using Game.Configs.Levels;
 using Game.Events;
 using Game.Models;
 using Game.Scripts;
@@ -26,16 +27,16 @@ public class LevelManager : MonoBehaviour
 
     #region Events
 
-    public event Action<bool> LevelEnded; 
+    public event Action<EndLevelResult> LevelEnded;
 
     #endregion
-    
-    
+
+
     private void Start()
     {
         InitializeTimer();
         _amountOfBallsInstances = _initialBalls.Count;
-        GameplayEventBus<GameplayEventType,DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<GameplayEventType, DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
         //set hud properties
         //go to next level?
 
@@ -54,10 +55,10 @@ public class LevelManager : MonoBehaviour
     {
         var ballSize = destroyEventArgs.Ball.BallModel.BallSize;
         _amountOfBallsInstances = ballSize != BallSize.X1 ? _amountOfBallsInstances + 1 : _amountOfBallsInstances - 1;
-        
+
         if (_amountOfBallsInstances == 0)
         {
-            LevelEnded?.Invoke(true);
+            LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, true, _levelModel.LevelIndex));
         }
     }
 
@@ -68,7 +69,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnTimesUp()
     {
-        LevelEnded?.Invoke(false);
+        LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
     }
 
     private void OnDestroy()

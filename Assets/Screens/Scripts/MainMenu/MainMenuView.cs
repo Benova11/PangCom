@@ -1,3 +1,4 @@
+using Game.Configs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,7 @@ namespace Screens.Scripts.MainMenu
 
         public void OnPlayClicked()
         {
-            SceneManager.LoadSceneAsync("GameScene");
+            SceneManager.LoadSceneAsync(SystemSceneIndexes.GAME_MANAGER_BUILD_ID);
         }
 
         public void OnQuitClicked()
