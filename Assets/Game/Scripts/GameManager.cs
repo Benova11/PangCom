@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
+using Game.Configs.Levels;
 using Game.Models;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
