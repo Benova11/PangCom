@@ -37,6 +37,7 @@ namespace Game.Scripts
             {
                 var player = Instantiate(_playerPrefab);
                 player.gameObject.SetActive(true);
+                
                 _currentPlayers.Add(player); //todo asign player input (diffrent positions?)
             }
         }
