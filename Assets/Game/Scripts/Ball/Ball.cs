@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Balls;
 using Game.Events;
@@ -19,6 +20,18 @@ namespace Game.Scripts
         #region Fields
 
         private IBallMovementController _ballMovementController;
+
+        #endregion
+
+        #region Events
+
+        public event Action<Ball> BallPopped; 
+
+        #endregion
+
+        #region Properties
+
+        public BallModel BallModel => _ballModel;
 
         #endregion
 
@@ -54,7 +67,8 @@ namespace Game.Scripts
 
         private async UniTaskVoid OnProjectileHit()
         {
-            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyEventArgs(_transform));
+            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyEventArgs(_transform, this));
+            BallPopped?.Invoke(this);
             
             if (_ballModel.BallSize == BallSize.X1)
             {

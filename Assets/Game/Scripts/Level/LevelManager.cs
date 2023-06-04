@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Game.Configs.Balls;
+using Game.Events;
 using Game.Models;
 using Game.Scripts;
 using UnityEngine;
@@ -9,15 +12,21 @@ public class LevelManager : MonoBehaviour
     #region Editor Components
 
     [SerializeField] private LevelModel _levelModel;
-    
-    [SerializeField] private List<Ball> _currentBalls;
+    [SerializeField] private List<Ball> _initialBalls;
     [SerializeField] private List<Obstacle> _obstacles;
 
     #endregion
 
     #region Fields
 
+    public int _amountOfBallsInstances;
     private CountDownTimer _countDownTimer;
+
+    #endregion
+
+    #region Events
+
+    public event Action<bool> LevelEnded; 
 
     #endregion
     
@@ -25,10 +34,9 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         InitializeTimer();
-        //start balls?
-        //start rewards spanwer
+        _amountOfBallsInstances = _initialBalls.Count;
+        GameplayEventBus<GameplayEventType,DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
         //set hud properties
-        //check game state - win <-> lose
         //go to next level?
 
         //check for how many players?
@@ -42,6 +50,17 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimerTick += OnTimerTick;
     }
 
+    private void OnBallPopped(DestroyEventArgs destroyEventArgs)
+    {
+        var ballSize = destroyEventArgs.Ball.BallModel.BallSize;
+        _amountOfBallsInstances = ballSize != BallSize.X1 ? _amountOfBallsInstances + 1 : _amountOfBallsInstances - 1;
+        
+        if (_amountOfBallsInstances == 0)
+        {
+            LevelEnded?.Invoke(true);
+        }
+    }
+
     private void OnTimerTick(int remainingTime)
     {
         _levelModel.RemainingTime = remainingTime;
@@ -49,7 +68,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnTimesUp()
     {
-        throw new System.NotImplementedException();
+        LevelEnded?.Invoke(false);
     }
 
     private void OnDestroy()

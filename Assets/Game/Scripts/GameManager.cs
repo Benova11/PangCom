@@ -27,6 +27,7 @@ namespace Game.Scripts
             levelInstance.TryGetComponent(out LevelManager levelManager);
             
             _currentLevel = levelManager;
+            _currentLevel.LevelEnded += OnLevelEnded;
         }
 
         private void CreatePlayers()
@@ -40,6 +41,11 @@ namespace Game.Scripts
                 
                 _currentPlayers.Add(player); //todo asign player input (diffrent positions?)
             }
+        }
+
+        private void OnLevelEnded(bool isSuccess)
+        {
+            //show level end popup
         }
     }
 }

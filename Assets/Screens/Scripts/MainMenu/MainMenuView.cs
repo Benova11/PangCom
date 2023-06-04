@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Screens.Scripts.MainMenu
 {
@@ -14,9 +15,7 @@ namespace Screens.Scripts.MainMenu
 
         public void OnPlayClicked()
         {
-            //loader
-            //move to game scene
-            //locate game manager?
+            SceneManager.LoadSceneAsync("GameScene");
         }
 
         public void OnQuitClicked()

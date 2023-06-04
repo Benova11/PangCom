@@ -115,13 +115,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelModel: {fileID: 11400000, guid: fc88858a75a154158b40dd00f347afad, type: 2}
-  _currentBalls:
+  _initialBalls:
   - {fileID: 8808538218396522744}
   - {fileID: 597899444681916754}
   _obstacles:
   - {fileID: 1897537716342229944}
   - {fileID: 7697657051245894489}
   - {fileID: 8821757881655321859}
+  _amountOfBallsInstances: 0
 --- !u!1 &7332512950504424201
 GameObject:
   m_ObjectHideFlags: 0
