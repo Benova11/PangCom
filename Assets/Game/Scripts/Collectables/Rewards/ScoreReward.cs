@@ -8,6 +8,11 @@ namespace Game.Scripts.Collectables.Rewards
     {
         public override RewardContent Content { get; set; }
 
+        public override void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
         protected override void OnCollisionEnter2D(Collision2D other)
         {
             other.gameObject.TryGetComponent(out Player player);

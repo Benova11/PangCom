@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Levels;
+using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
 using UnityEngine;
@@ -30,6 +32,7 @@ namespace Game.Scripts
         {
             CreateLevel();
             CreatePlayers();
+            GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
         }
 
         private async void CreateLevel()
@@ -60,6 +63,19 @@ namespace Game.Scripts
         {
             var popupManager = await PopupManagerLocator.Get();
             popupManager.CreateEndLevelPopup(endLevelResult);
+        }
+        
+        private void OnNextLevelRequested(NextLevelEventArgs args)
+        {
+            Destroy(_currentLevel.gameObject);
+            
+            _gameConfigModel.CurrentLevelIndex = args.CurrentLevelIndex + 1;
+            CreateLevel();
+        }
+
+        private void OnDestroy()
+        {
+            GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Unsubscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
         }
 
         #endregion

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Configs.Levels;
 using Game.Events;
+using Game.Infrastructures.Popups;
 using Screens.Scripts;
 using TMPro;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game.Screens.Popups
 {
-    public class EndLevelPopup : MonoBehaviour, IPopup<EndLevelResult>
+    public class EndLevelPopup : BasePopupPrefab<EndLevelResult> 
     {
         #region EditorComponents
 
@@ -26,7 +27,7 @@ namespace Game.Screens.Popups
 
         #region Methods
 
-        public UniTask Show(EndLevelResult endLevelResult)
+        public override UniTask Show(EndLevelResult endLevelResult)
         {
             _endLevelResult = endLevelResult;
 
@@ -36,15 +37,22 @@ namespace Game.Screens.Popups
             return UniTask.CompletedTask;
         }
 
+        protected override void ClosePopup()
+        {
+            Destroy(gameObject);
+        }
+
+        public void OnCloseClicked()
+        {
+            SceneManager.LoadSceneAsync(SystemSceneIndexes.MAIN_MENU_BUILD_ID);
+            Destroy(gameObject);
+        }
+
         public void OnNextLevelClicked()
         {
             var nextLevelEventArgs = new NextLevelEventArgs(_endLevelResult.LevelIndex);
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Publish(GameplayEventType.NextLevelRequested, nextLevelEventArgs);
-        }
-
-        public void OnQuitClicked()
-        {
-            SceneManager.LoadSceneAsync(SystemSceneIndexes.MAIN_MENU_BUILD_ID);
+            ClosePopup();
         }
 
         #endregion

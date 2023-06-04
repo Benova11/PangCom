@@ -5,6 +5,7 @@ using Game.Configs.Levels;
 using Game.Events;
 using Game.Models;
 using Game.Scripts;
+using Game.Scripts.Collectables;
 using UnityEngine;
 using Utils.Timer;
 
@@ -22,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
     public int _amountOfBallsInstances;
     private CountDownTimer _countDownTimer;
+    private List<IDestroyable> _collectables;
 
     #endregion
 
@@ -35,8 +37,15 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         InitializeTimer();
+
         _amountOfBallsInstances = _initialBalls.Count;
+
         GameplayEventBus<GameplayEventType, DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+
+        //todo subscribe tor rewards event bus 
+        //keep them in list
+        //destroy whtas lefft onlevel destoy;
+
         //set hud properties
         //go to next level?
 
@@ -72,9 +81,28 @@ public class LevelManager : MonoBehaviour
         LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
     }
 
+    private void DestroyObstaclesLeft()
+    {
+        foreach (var obstacle in _obstacles)
+        {
+            Destroy(obstacle.gameObject);
+        }
+    }
+
+    private void DestroyCollectableLeft()
+    {
+        foreach (var collectable in _collectables)
+        {
+            collectable.Destroy();
+        }
+    }
+
     private void OnDestroy()
     {
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
+
+        DestroyObstaclesLeft();
+        DestroyCollectableLeft();
     }
 }
