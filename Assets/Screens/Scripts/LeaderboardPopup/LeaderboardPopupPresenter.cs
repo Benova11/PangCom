@@ -15,10 +15,9 @@ namespace Screens.Scripts
             ShowPopup();
         }
 
-        private void ShowPopup()
+        private async void ShowPopup()
         {
-
-            _view.Show(_model.GetLeaderboardChart());
+            _view.Show(await _model.GetLeaderboardChart());
         }
     }
 }

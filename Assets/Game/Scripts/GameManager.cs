@@ -36,6 +36,7 @@ namespace Game.Scripts
         private void Start()
         {
             InitializeLevel();
+            _leaderboardStorageSystem = new LeaderboardStorageSystem();
         }
         
         private void Update()

@@ -11,7 +11,7 @@ namespace Game.Scripts.Collectables.Rewards
 
         public override void DestroySelf()
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
 
         public override event Action OnDestroyed;

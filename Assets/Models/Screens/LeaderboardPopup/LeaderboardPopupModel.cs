@@ -1,33 +1,37 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Configs.Screens.LeaderboardPopup;
 using Screens.Scripts;
 using UnityEngine;
+using Utils.Storage;
 
 namespace Models.Screens.LeaderboardPopup
 {
     [CreateAssetMenu(fileName = "LeaderboardPopupModel", menuName = "Models/Screens/LeaderboardPopupModel")]
-    public class LeaderboardPopupModel :ScriptableObject
+    public class LeaderboardPopupModel : ScriptableObject
     {
         [SerializeField] private PlayerLeaderboardView _playerLeaderboardViewPrefab;
 
-        public List<PlayerLeaderboardView> GetLeaderboardChart()
+        public async UniTask<List<PlayerLeaderboardView>> GetLeaderboardChart()
         {
-            var leaderboardChart = GetLeaderboardChartData();
+            var leaderboardChart = await GetLeaderboardChartData();
             var leaderboardPlayersList = PopulateLeaderboardPlayersList(leaderboardChart);
             return leaderboardPlayersList;
         }
-        
-        private List<LeaderboardPlayer> GetLeaderboardChartData()
-        {
-            return null;
 
+        private async UniTask <List<LeaderboardPlayer>> GetLeaderboardChartData()
+        {
+            var leaderboardStorageSystem = new LeaderboardStorageSystem();
+            var leaderboardPlayersList = await leaderboardStorageSystem.Load();
+
+            return leaderboardPlayersList;
         }
-        
+
         private List<PlayerLeaderboardView> PopulateLeaderboardPlayersList(List<LeaderboardPlayer> leaderboardChart)
         {
             return null;
         }
-        
+
         public PlayerLeaderboardView PlayerLeaderboardViewPrefab => _playerLeaderboardViewPrefab;
     }
 }
