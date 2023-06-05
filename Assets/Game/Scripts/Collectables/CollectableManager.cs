@@ -25,7 +25,7 @@ namespace Game.Scripts.Collectables
         private void Start()
         {
             CreateFactories();
-            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
+            GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
             GameplayEventBus<CollectableEventType,CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         }
         
@@ -34,7 +34,7 @@ namespace Game.Scripts.Collectables
             _rewardsFactory = new RewardsFactory();
         }
 
-        private async void OnBallDestroyed(DestroyEventArgs args)
+        private async void OnBallDestroyed(DestroyBallEventArgs args)
         {
             var rnd = Random.Range(0,10);
             var rewardInstantiationChance = _gameConfig.CurrentLevel.RewardsChanceRate;
@@ -56,7 +56,7 @@ namespace Game.Scripts.Collectables
 
         private void OnDestroy()
         {
-            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
+            GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
         }
 
         #endregion

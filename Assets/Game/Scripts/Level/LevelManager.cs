@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
 
         _amountOfBallsInstances = _initialBalls.Count;
 
-        GameplayEventBus<GameplayEventType, DestroyEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
 
         //todo subscribe tor rewards event bus 
         //keep them in list
@@ -66,9 +66,9 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimerTick += OnTimerTick;
     }
 
-    private void OnBallPopped(DestroyEventArgs destroyEventArgs)
+    private void OnBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
-        var ballSize = destroyEventArgs.Ball.BallModel.BallSize;
+        var ballSize = destroyBallEventArgs.Ball.BallModel.BallSize;
         _amountOfBallsInstances = ballSize != BallSize.X1 ? _amountOfBallsInstances + 1 : _amountOfBallsInstances - 1;
 
         if (_amountOfBallsInstances == 0)
