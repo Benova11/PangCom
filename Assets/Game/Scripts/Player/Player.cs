@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Events;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -17,6 +18,7 @@ namespace Game.Scripts
 
         #region Fields
 
+        private int _currentHealth;
         private WeaponManager _weaponManager;
         private List<Projectile> _supportedAmmo;
 
@@ -81,11 +83,21 @@ namespace Game.Scripts
             other.collider.gameObject.TryGetComponent(out Ball projectile);
             if (projectile != null)
             {
-                //todo
-                // Destroy(gameObject);
+                _currentHealth--;
+                Debug.Log(_currentHealth);
+                if (_currentHealth <= 0)
+                {
+                    GameplayEventBus<GameplayEventType,PlayerDeadEventArgs>.Publish(GameplayEventType.PlayerDead, new PlayerDeadEventArgs(this));
+                    Destroy(gameObject);
+                }
             }
         }
 
         #endregion
+
+        public void SetInitialHealth(int health)
+        {
+            _currentHealth = health;
+        }
     }
 }

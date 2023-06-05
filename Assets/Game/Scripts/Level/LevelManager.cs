@@ -86,6 +86,11 @@ public class LevelManager : MonoBehaviour
     {
         LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
     }
+    
+    public void OnPlayersDead(Action<EndLevelResult> onLevelEndedCallback)
+    {
+        onLevelEndedCallback?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
+    }
 
     private void DestroyObstaclesLeft()
     {

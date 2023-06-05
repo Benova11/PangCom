@@ -32,10 +32,10 @@ namespace Game.Models
         public void UpdateNextLevel()
         {
             var nextLevelIndex = _currentLevel.LevelIndex + 1;
-            if (nextLevelIndex < _supportedLevelsModels.Count)
-            {
-                _currentLevel = _supportedLevelsModels[nextLevelIndex];
-            }
+            
+            _currentLevel = nextLevelIndex < _supportedLevelsModels.Count 
+                ? _supportedLevelsModels[nextLevelIndex] 
+                : _supportedLevelsModels[0];
         }
 
         #endregion

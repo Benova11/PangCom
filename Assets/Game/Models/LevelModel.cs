@@ -12,6 +12,7 @@ namespace Game.Models
         [SerializeField] private int _levelIndex;
         [SerializeField] private int _currentScore;
         [SerializeField] private int _remainingTime;
+        [SerializeField] private int _initialPlayerHealth;
         [SerializeField] private int _timePerLevelSeconds;
         [SerializeField] private List<Projectile> _supportedAmmos;
         #endregion
@@ -35,6 +36,8 @@ namespace Game.Models
         }
         
         public List<Projectile> SupportedAmmos => _supportedAmmos;
+        
+        public int InitialPlayerHealth => _initialPlayerHealth;
 
         #endregion
     }

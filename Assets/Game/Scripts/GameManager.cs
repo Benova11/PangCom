@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Levels;
@@ -36,8 +35,11 @@ namespace Game.Scripts
         private async UniTaskVoid InitializeLevel()
         {
             await CreateLevel();
+            
             CreatePlayers();
+            
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
+            GameplayEventBus<GameplayEventType, PlayerDeadEventArgs>.Subscribe(GameplayEventType.PlayerDead, OnPlayerDead);
         }
 
         private async UniTask CreateLevel()
@@ -58,9 +60,20 @@ namespace Game.Scripts
                 var player = Instantiate(_playerPrefab);
                 player.gameObject.SetActive(true);
                 player.InitialWeapon(_currentLevel.SupportedAmmos);
+                player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);
                 _currentPlayers.Add(player);
                 //todo asign player input (diffrent positions?)
                 //todo instntiate propeiate player prefab
+            }
+        }
+        
+        private void OnPlayerDead(PlayerDeadEventArgs args)
+        {
+            _currentPlayers.Remove(args.DeadPlayer);
+
+            if (_currentPlayers.Count == 0)
+            {
+                _currentLevel.OnPlayersDead(OnLevelEnded);
             }
         }
 
@@ -70,12 +83,14 @@ namespace Game.Scripts
             popupManager.CreateEndLevelPopup(endLevelResult);
         }
         
-        private void OnNextLevelRequested(NextLevelEventArgs args)
+        private async void OnNextLevelRequested(NextLevelEventArgs args)
         {
             Destroy(_currentLevel.gameObject);
             _gameConfigModel.UpdateNextLevel();
             
-            CreateLevel();
+            await CreateLevel();
+            
+            CreatePlayers();
         }
 
         private void OnDestroy()
