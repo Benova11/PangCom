@@ -14,7 +14,7 @@ namespace Game.Scripts
     {
         #region Editor Comp
 
-        [SerializeField] private Player _playerPrefab;
+        [SerializeField] private Player[] _playerPrefabs;
         [SerializeField] private GameConfigModel _gameConfigModel;
 
         #endregion
@@ -69,7 +69,7 @@ namespace Game.Scripts
 
             for (int i = 0; i < playersToCreate; i++)
             {
-                var player = Instantiate(_playerPrefab);
+                var player = Instantiate(_playerPrefabs[i]);
                 player.gameObject.SetActive(true);
                 player.InitialWeapon(_currentLevel.SupportedAmmos);
                 player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);

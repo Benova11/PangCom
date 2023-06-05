@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Configs;
 using Game.Events;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Game.Scripts
         #region Editor Components
 
         [SerializeField] private Rigidbody2D _rigidBody;
+        [SerializeField] private PlayerInputOrder _inputOrder;
         [SerializeField] private Transform _projectileOriginTransform;
 
         #endregion
@@ -33,14 +35,14 @@ namespace Game.Scripts
 
         private void FixedUpdate()
         {
-            Move(InputManager.GetMovementInput());
+            Move(InputManager.GetMovementInput(_inputOrder));
         }
 
         private void Update()
         {
             if(_weaponManager == null) return;
 
-            if (InputManager.IsShootRequested())
+            if (InputManager.IsShootRequested(_inputOrder))
             {
                 ShootProjectile();
             }
@@ -60,6 +62,11 @@ namespace Game.Scripts
             
             _supportedAmmo = supportedAmmo;
             _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform,_supportedAmmo[0]), supportedAmmo);
+        }
+
+        public void SetInputOrder(PlayerInputOrder inputOrder)
+        {
+            
         }
 
         private void Move(float horizontalInput)

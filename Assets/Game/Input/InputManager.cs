@@ -1,3 +1,4 @@
+using Game.Configs;
 using UnityEngine;
 
 namespace Game
@@ -8,28 +9,28 @@ namespace Game
     {
         #region Consts
 
+        private const string SHOOT_REQUEST_AXIS_NAME = "Shoot";
         private const string HORIZONTAL_AXIS_NAME = "Horizontal";
         private const KeyCode TOGGLE_PAUSE_GAME = KeyCode.Escape;
-        private const KeyCode SHOOT_REQUEST_BUTTON = KeyCode.Space;
         private const KeyCode SWITCH_WEAPON_REQUEST_BUTTON = KeyCode.RightControl;
 
         #endregion
 
         #region Methods
 
-        public static float GetMovementInput()
+        public static float GetMovementInput(PlayerInputOrder playerInputOrder)
         {
-            return Input.GetAxisRaw(HORIZONTAL_AXIS_NAME);
+            return SimpleInput.GetAxisRaw(HORIZONTAL_AXIS_NAME + (int)playerInputOrder);
         }
 
-        public static bool IsShootRequested()
+        public static bool IsShootRequested(PlayerInputOrder playerInputOrder)
         {
-            return Input.GetKeyDown(SHOOT_REQUEST_BUTTON);
+            return SimpleInput.GetButtonDown(SHOOT_REQUEST_AXIS_NAME + (int)playerInputOrder);
         }
 
         public static bool IsSwitchWeaponRequested()
         {
-            return Input.GetKeyDown(SWITCH_WEAPON_REQUEST_BUTTON);
+            return false;
         }
 
         public static bool IsToggleRequested()
