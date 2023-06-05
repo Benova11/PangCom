@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game.Scripts.Collectables
@@ -7,7 +8,8 @@ namespace Game.Scripts.Collectables
     {
         public abstract T Content { get; set; }
         
-        public abstract void Destroy();
+        public abstract void DestroySelf();
+        public abstract event Action OnDestroyed;
         protected abstract void OnCollisionEnter2D(Collision2D other);
     }
 }

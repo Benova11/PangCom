@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using Game.Configs.Balls;
 using Game.Events;
 using Game.Models;
@@ -15,6 +14,7 @@ namespace Game.Scripts
         [SerializeField] protected Transform _transform;
         [SerializeField] protected BallModel _ballModel;
         [SerializeField] protected BallHorizontalDirection _horizontalOrientation = BallHorizontalDirection.Right;
+
         #endregion
 
         #region Fields
@@ -25,13 +25,14 @@ namespace Game.Scripts
 
         #region Events
 
-        public event Action<Ball> BallPopped; 
+        public event Action<Ball> BallPopped;
 
         #endregion
 
         #region Properties
 
         public BallModel BallModel => _ballModel;
+        public Transform Transform => _transform;
 
         #endregion
 
@@ -65,31 +66,16 @@ namespace Game.Scripts
             }
         }
 
-        private async UniTaskVoid OnProjectileHit()
+        private void OnProjectileHit()
         {
-            GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
+            GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
             BallPopped?.Invoke(this);
-            
-            if (_ballModel.BallSize == BallSize.X1)
-            {
-                Destroy(gameObject);
-            }
-            else
+
+            if (_ballModel.BallSize != BallSize.X1)
             {
                 _rigidBody.gameObject.SetActive(false);
                 _transform.localScale = Vector3.zero;
-                await SplitBall();
-
-                Destroy(gameObject);
             }
-        }
-
-        private async UniTask SplitBall()
-        {
-            var newBallsSize = _ballModel.BallSize - 1;
-            var ballSplitter = new BallSplitter();
-
-            await ballSplitter.Split(_transform, _ballModel.BallType, newBallsSize);
         }
 
         private void OnDestroy()

@@ -18,10 +18,10 @@ namespace Game.Infrastructures.Popups
 
         #region Methods
 
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
-        }
+        // private void Awake()
+        // {
+        //     DontDestroyOnLoad(this);
+        // }
 
         public async UniTask<EndLevelPopup> CreateEndLevelPopup(EndLevelResult endLevelResult)
         {

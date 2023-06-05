@@ -1,3 +1,4 @@
+using System;
 using Game.Configs.Collectable;
 using Game.Events;
 using UnityEngine;
@@ -8,10 +9,12 @@ namespace Game.Scripts.Collectables.Rewards
     {
         public override RewardContent Content { get; set; }
 
-        public override void Destroy()
+        public override void DestroySelf()
         {
             Destroy(gameObject);
         }
+
+        public override event Action OnDestroyed;
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {

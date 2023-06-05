@@ -69,17 +69,21 @@ namespace Game.Scripts
 
             for (int i = 0; i < playersToCreate; i++)
             {
-                var player = Instantiate(_playerPrefabs[i]);
-                player.gameObject.SetActive(true);
-                player.InitialWeapon(_currentLevel.SupportedAmmos);
-                player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);
-                _currentPlayers.Add(player);
-                
-                //todo asign player input (diffrent positions?)
-                //todo instntiate propeiate player prefab
+                CreatePlayerInstance(i);
             }
         }
-        
+
+        private void CreatePlayerInstance(int i)
+        {
+            var player = Instantiate(_playerPrefabs[i]);
+
+            player.gameObject.SetActive(true);
+            player.InitialWeapon(_currentLevel.SupportedAmmos);
+            player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);
+
+            _currentPlayers.Add(player);
+        }
+
         private void OnPlayerDead(PlayerDeadEventArgs args)
         {
             _currentPlayers.Remove(args.DeadPlayer);

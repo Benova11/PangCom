@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace Game
 {
-    //todo config second player input
-    //todo change key code to mobile
     public static class InputManager
     {
         #region Consts
