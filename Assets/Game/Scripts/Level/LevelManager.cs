@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Game.Configs.Balls;
 using Game.Configs.Collectable;
 using Game.Configs.Levels;
 using Game.Events;
+using Game.Infrastructures.BallSpawners;
 using Game.Models;
 using Game.Scripts;
 using Game.Scripts.Collectables;
@@ -29,6 +28,7 @@ public class LevelManager : MonoBehaviour
 
     private CountDownTimer _countDownTimer;
     private List<IDestroyable> _collectables;
+    private BallPoppingHandler _ballPoppingHandler;
 
     #endregion
 
@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         _collectables = new List<IDestroyable>();
+        _ballPoppingHandler = new BallPoppingHandler();
     }
 
     private void Start()
@@ -83,39 +84,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private async Task HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
+    private async UniTask HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
-        var ballModel = destroyBallEventArgs.Ball.BallModel;
-
-        if (ballModel.BallSize == BallSize.X1)
-        {
-            DestroyPoppedBall(destroyBallEventArgs);
-        }
-        else
-        {
-            await SplitBall(destroyBallEventArgs.Ball);
-            
-            DestroyPoppedBall(destroyBallEventArgs);
-        }
-    }
-
-    private void DestroyPoppedBall(DestroyBallEventArgs destroyBallEventArgs)
-    {
-        _currentBalls.Remove(destroyBallEventArgs.Ball);
-        Destroy(destroyBallEventArgs.Ball.gameObject);
-    }
-
-    private async UniTask SplitBall(Ball ball)
-    {
-        var ballSplitter = new BallSplitter();
-        var newBallsSize = ball.BallModel.BallSize - 1;
-
-        var newAddedBalls = await ballSplitter.Split(ball.Transform, ball.BallModel.BallType, newBallsSize);
-
-        foreach (var newAddedBall in newAddedBalls)
-        {
-            _currentBalls.Add(newAddedBall);
-        }
+        _currentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
     }
 
     private void OnTimerTick(int remainingTime)

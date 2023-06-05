@@ -115,13 +115,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 5306951950797854226}
   _levelModel: {fileID: 11400000, guid: 12a679b6e6b0f41449098ddbefc2f9a1, type: 2}
-  _initialBalls:
+  _currentBalls:
   - {fileID: 597899444681916754}
   - {fileID: 5375108659339201783}
   _obstacles:
   - {fileID: 1897537716342229944}
   - {fileID: 8821757881655321859}
-  _amountOfBallsInstances: 0
 --- !u!1 &7332512950504424201
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 4836273935301119087, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
       propertyPath: _initialVelocity.x
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836273935301119087, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
+      propertyPath: _horizontalOrientation
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6276956065358357968, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
       propertyPath: m_Name
@@ -427,6 +430,10 @@ PrefabInstance:
     - target: {fileID: 4836273935301119087, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
       propertyPath: _initialVelocity.x
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836273935301119087, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
+      propertyPath: _horizontalOrientation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6276956065358357968, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
       propertyPath: m_Name
