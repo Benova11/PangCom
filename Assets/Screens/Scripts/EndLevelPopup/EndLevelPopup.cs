@@ -41,7 +41,7 @@ namespace Game.Screens.Popups
             Destroy(gameObject);
         }
 
-        public void OnCloseClicked()
+        public void OnQuitClicked()
         {
             SceneManager.LoadSceneAsync(SystemSceneIndexes.MAIN_MENU_BUILD_ID);
             Destroy(gameObject);

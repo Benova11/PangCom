@@ -67,7 +67,7 @@ namespace Game.Scripts
 
         private async UniTaskVoid OnProjectileHit()
         {
-            GameplayEventBus<GameplayEventType,DestroyEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyEventArgs(_transform, this));
+            GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
             BallPopped?.Invoke(this);
             
             if (_ballModel.BallSize == BallSize.X1)

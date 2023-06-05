@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Events
 {
-    public class DestroyEventArgs : EventArgs
+    public class DestroyBallEventArgs : EventArgs
     {
         private readonly Ball _ball;
         private readonly Transform _originTransform;
@@ -12,7 +12,7 @@ namespace Game.Events
         public Ball Ball => _ball;
         public Transform OriginTransform => _originTransform;
         
-        public DestroyEventArgs(Transform originTransform, Ball ball)
+        public DestroyBallEventArgs(Transform originTransform, Ball ball)
         {
             _ball = ball;
             _originTransform = originTransform;
