@@ -94,9 +94,14 @@ public class LevelManager : MonoBehaviour
 
     private void DestroyObstaclesLeft()
     {
+        if(_obstacles == null) return;
+
         foreach (var obstacle in _obstacles)
         {
-            Destroy(obstacle.gameObject);
+            if (obstacle != null)
+            {
+                Destroy(obstacle.gameObject);
+            }
         }
     }
 
@@ -106,7 +111,7 @@ public class LevelManager : MonoBehaviour
         
         foreach (var collectable in _collectables)
         {
-            collectable.Destroy();
+            collectable?.Destroy();
         }
     }
 

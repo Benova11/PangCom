@@ -11,7 +11,7 @@ namespace Game.Scripts.Collectables
         #region Editor Components
 
         [SerializeField] private GameConfigModel _gameConfig;
-
+        
         #endregion
 
         #region Fields
@@ -36,11 +36,17 @@ namespace Game.Scripts.Collectables
 
         private async void OnBallDestroyed(DestroyEventArgs args)
         {
-            var scoreReward = await _rewardsFactory.Create(args.OriginTransform, RewardType.Score);
-            scoreReward.Content = new RewardContent
+            var rnd = Random.Range(0,10);
+            var rewardInstantiationChance = _gameConfig.CurrentLevel.RewardsChanceRate;
+            
+            if (rnd < rewardInstantiationChance)
             {
-                Amount = 10
-            };
+                var scoreReward = await _rewardsFactory.Create(args.OriginTransform, RewardType.Score);
+                scoreReward.Content = new RewardContent
+                {
+                    Amount = 10
+                };
+            }
         }
         
         private void OnRewardCollected(CollectableEventContent<RewardContent> content)
