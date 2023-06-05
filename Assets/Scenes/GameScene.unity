@@ -1356,7 +1356,12 @@ PrefabInstance:
       value: LeaderboardPopup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 266053033778923122, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}
+    - {fileID: 15861098716161624, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}
+    - {fileID: 1088775949942105820, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}
+    - {fileID: 4843101462679355087, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}
+    - {fileID: 131929256181283920, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7ce0754d5ccf4d2e9bd59bacbf413b4, type: 3}

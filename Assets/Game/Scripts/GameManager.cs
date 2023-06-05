@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Levels;
+using Game.Configs.Screens.LeaderboardPopup;
 using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
 using Screens.Scripts.PauseMenu;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Utils.Storage;
 
 namespace Game.Scripts
 {
@@ -24,6 +27,7 @@ namespace Game.Scripts
         private LevelManager _currentLevel;
         private List<Player> _currentPlayers;
         private PauseMenuPopup _pauseMenuPopup;
+        private LeaderboardStorageSystem _leaderboardStorageSystem;
 
         #endregion
 
@@ -100,6 +104,8 @@ namespace Game.Scripts
 
             var popupManager = await PopupManagerLocator.Get();
             popupManager.CreateEndLevelPopup(endLevelResult);
+            
+            _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score,"Player"+DateTime.Now));
         }
         
         private async void OnNextLevelRequested(NextLevelEventArgs args)

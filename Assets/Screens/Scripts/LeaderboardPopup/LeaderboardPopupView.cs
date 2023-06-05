@@ -3,9 +3,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Screens.Scripts
 {
-    public class LeaderboardPopupView : BasePopupPrefab<List<LeaderBoardPlayer>>
+    public class LeaderboardPopupView : BasePopupPrefab<List<PlayerLeaderboardView>>
     {
-        public override UniTask Show(List<LeaderBoardPlayer> data)
+        public override UniTask Show(List<PlayerLeaderboardView> playersList)
         {
             throw new System.NotImplementedException();
         }
