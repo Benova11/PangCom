@@ -547,9 +547,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4780881061375168573, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075561179373378683, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116698571120664238, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539572185862899513, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304194296808665437, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7645297424635978004, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
       propertyPath: m_Name
       value: GameBorders
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017862167179269193, guid: bf9282ab3da7e419198f63b4603d5d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
