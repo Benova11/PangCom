@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 220152998}
   - component: {fileID: 220153001}
   - component: {fileID: 220153000}
+  - component: {fileID: 220153002}
   m_Layer: 5
   m_Name: HudPanel
   m_TagString: Untagged
@@ -200,6 +201,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220152997}
   m_CullTransparentMesh: 1
+--- !u!114 &220153002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220152997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9924b6c93c4293818291c50d9d737b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameConfigModel: {fileID: 11400000, guid: 0f19d52deaa69437a84dc5829923b4b1, type: 2}
+  _playerInputHudObjects:
+  - {fileID: 1158853777}
+  - {fileID: 1503404357}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +859,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158853777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+  m_PrefabInstance: {fileID: 1457294775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1457294775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -959,6 +981,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
   m_PrefabInstance: {fileID: 1457294775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1503404357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+  m_PrefabInstance: {fileID: 938872568}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1739372147
 GameObject:
