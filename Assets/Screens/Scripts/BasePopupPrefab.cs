@@ -7,6 +7,6 @@ namespace Screens.Scripts
     {
         public abstract UniTask Show(T data);
 
-        protected abstract void ClosePopup();
+        public abstract void ClosePopup();
     }
 }

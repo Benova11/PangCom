@@ -39,7 +39,7 @@ namespace Game.Scripts
         private void Update()
         {
             if(_weaponManager == null) return;
-            
+
             if (InputManager.IsShootRequested())
             {
                 ShootProjectile();

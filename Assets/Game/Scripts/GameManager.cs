@@ -4,6 +4,7 @@ using Game.Configs.Levels;
 using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
+using Screens.Scripts.PauseMenu;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -19,9 +20,10 @@ namespace Game.Scripts
         #endregion
 
         #region Fields
-
+        
         private LevelManager _currentLevel;
         private List<Player> _currentPlayers;
+        private PauseMenuPopup _pauseMenuPopup;
 
         #endregion
 
@@ -30,6 +32,14 @@ namespace Game.Scripts
         private void Start()
         {
             InitializeLevel();
+        }
+        
+        private void Update()
+        {
+            if (InputManager.IsToggleRequested())
+            {
+                ToggleGameRunningState();
+            }
         }
         
         private async UniTaskVoid InitializeLevel()
@@ -48,7 +58,7 @@ namespace Game.Scripts
             levelInstance.TryGetComponent(out LevelManager levelManager);
 
             _currentLevel = levelManager;
-            _currentLevel.LevelEnded += OnLevelEnded;
+            _currentLevel.LevelEnded += OnCurrentLevelEnded;
         }
 
         private void CreatePlayers()
@@ -73,11 +83,11 @@ namespace Game.Scripts
 
             if (_currentPlayers.Count == 0)
             {
-                _currentLevel.OnPlayersDead(OnLevelEnded);
+                _currentLevel.OnPlayersDead(OnCurrentLevelEnded);
             }
         }
 
-        private async void OnLevelEnded(EndLevelResult endLevelResult)
+        private async void OnCurrentLevelEnded(EndLevelResult endLevelResult)
         {
             var popupManager = await PopupManagerLocator.Get();
             popupManager.CreateEndLevelPopup(endLevelResult);
@@ -91,6 +101,20 @@ namespace Game.Scripts
             await CreateLevel();
             
             CreatePlayers();
+        }
+
+        private async UniTask ToggleGameRunningState()
+        {
+            if (_pauseMenuPopup == null)
+            {
+                var popupManager = await PopupManagerLocator.Get();
+                _pauseMenuPopup = await popupManager.CreatePauseMenuPopup(new CurrentLevelState(_gameConfigModel.CurrentLevel.CurrentScore,_gameConfigModel.CurrentLevel.LevelIndex));
+            }
+            else
+            {
+                _pauseMenuPopup.ClosePopup();
+                _pauseMenuPopup = null;
+            }
         }
 
         private void OnDestroy()

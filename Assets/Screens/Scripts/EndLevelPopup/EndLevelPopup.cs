@@ -36,15 +36,15 @@ namespace Game.Screens.Popups
             return UniTask.CompletedTask;
         }
 
-        protected override void ClosePopup()
+        public override void ClosePopup()
         {
             Destroy(gameObject);
         }
 
         public void OnQuitClicked()
         {
+            ClosePopup();
             SceneManager.LoadSceneAsync(SystemSceneIndexes.MAIN_MENU_BUILD_ID);
-            Destroy(gameObject);
         }
 
         public void OnNextLevelClicked()
