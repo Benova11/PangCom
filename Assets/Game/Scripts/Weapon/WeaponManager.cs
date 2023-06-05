@@ -1,4 +1,5 @@
-using Game.Configs.Projectile;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Scripts
 {
@@ -7,25 +8,31 @@ namespace Game.Scripts
         #region Fields
 
         private readonly int _projectileTypesCount;
+        private readonly List<Projectile> _supportedAmmos;
 
+        private Projectile _currentProjectile;
         public IWeapon Weapon { get; }
 
         #endregion
 
-        private int _currentProjectileTypeIndex;
+        #region Properties
+
+        public Projectile CurrentProjectile => _currentProjectile;
+
+        #endregion
 
         #region Methods
 
-        public WeaponManager(IWeapon weapon, int projectileTypesCount)
+        public WeaponManager(IWeapon weapon, List<Projectile> supportedAmmos)
         {
             Weapon = weapon;
-            _projectileTypesCount = projectileTypesCount;
+            _supportedAmmos = supportedAmmos;
         }
 
-        public void SwitchToNextProjectileType()
+        public void SwitchAmmo()
         {
-            _currentProjectileTypeIndex = (_currentProjectileTypeIndex + 1) % _projectileTypesCount;
-            Weapon.SwitchToNextProjectileType((ProjectileType)_currentProjectileTypeIndex);
+            _currentProjectile = _supportedAmmos[Random.Range(0, _supportedAmmos.Count)];
+            Weapon.SwitchAmmo(_currentProjectile);
         }
 
         #endregion

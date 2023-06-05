@@ -1,4 +1,5 @@
 using System;
+using Game.Configs.Projectile;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -9,12 +10,19 @@ namespace Game.Scripts
         #region Editor Components
 
         [SerializeField] private Rigidbody2D _rigidBody;
+        [SerializeField] private ProjectileType _projectileType;
 
         #endregion
 
         #region Events
 
         public event Action<Projectile> Collided;
+
+        #endregion
+
+        #region Properties
+
+        public ProjectileType ProjectileType => _projectileType;
 
         #endregion
 

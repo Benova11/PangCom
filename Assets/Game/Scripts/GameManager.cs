@@ -30,14 +30,19 @@ namespace Game.Scripts
 
         private void Start()
         {
-            CreateLevel();
+            InitializeLevel();
+        }
+        
+        private async UniTaskVoid InitializeLevel()
+        {
+            await CreateLevel();
             CreatePlayers();
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
         }
 
-        private async void CreateLevel()
+        private async UniTask CreateLevel()
         {
-            var levelInstance = await Addressables.InstantiateAsync(LevelsAddressableKeys.LevelPrefab + _gameConfigModel.CurrentLevelIndex);
+            var levelInstance = await Addressables.InstantiateAsync(LevelsAddressableKeys.LevelPrefab + _gameConfigModel.CurrentLevel.LevelIndex);
             levelInstance.TryGetComponent(out LevelManager levelManager);
 
             _currentLevel = levelManager;
@@ -52,7 +57,7 @@ namespace Game.Scripts
             {
                 var player = Instantiate(_playerPrefab);
                 player.gameObject.SetActive(true);
-
+                player.InitialWeapon(_currentLevel.SupportedAmmos);
                 _currentPlayers.Add(player);
                 //todo asign player input (diffrent positions?)
                 //todo instntiate propeiate player prefab
@@ -68,8 +73,8 @@ namespace Game.Scripts
         private void OnNextLevelRequested(NextLevelEventArgs args)
         {
             Destroy(_currentLevel.gameObject);
+            _gameConfigModel.UpdateNextLevel();
             
-            _gameConfigModel.CurrentLevelIndex = args.CurrentLevelIndex + 1;
             CreateLevel();
         }
 

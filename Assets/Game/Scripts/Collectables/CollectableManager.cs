@@ -10,7 +10,7 @@ namespace Game.Scripts.Collectables
     {
         #region Editor Components
 
-        [SerializeField] private LevelModel _levelModel;
+        [SerializeField] private GameConfigModel _gameConfig;
 
         #endregion
 
@@ -45,7 +45,7 @@ namespace Game.Scripts.Collectables
         
         private void OnRewardCollected(CollectableEventContent<RewardContent> content)
         {
-            _levelModel.CurrentScore += content.Args.Amount;
+            _gameConfig.CurrentLevel.CurrentScore += content.Args.Amount;
         }
 
         private void OnDestroy()

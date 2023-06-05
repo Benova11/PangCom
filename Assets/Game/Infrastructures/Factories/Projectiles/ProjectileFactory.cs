@@ -14,7 +14,7 @@ namespace Game.Infrastructures.Factories.Projectiles
             {
                 case ProjectileType.Basic:
                     return await CreateBasicProjectile(position);
-                case ProjectileType.Rope:
+                case ProjectileType.Small:
                     return await CreateSmallProjectile(position);
                 default:
                     return null;

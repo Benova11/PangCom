@@ -6,6 +6,6 @@ namespace Game.Scripts
     public interface IWeapon
     {
         UniTask Shoot();
-        void SwitchToNextProjectileType(ProjectileType projectileType);
+        void SwitchAmmo(Projectile projectile);
     }
 }

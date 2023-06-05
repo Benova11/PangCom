@@ -33,6 +33,12 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    #region Pro
+
+    public List<Projectile> SupportedAmmos => _levelModel.SupportedAmmos;
+
+    #endregion
+
 
     private void Start()
     {
@@ -91,6 +97,8 @@ public class LevelManager : MonoBehaviour
 
     private void DestroyCollectableLeft()
     {
+        if(_collectables == null) return;
+        
         foreach (var collectable in _collectables)
         {
             collectable.Destroy();

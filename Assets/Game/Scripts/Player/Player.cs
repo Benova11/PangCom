@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Scripts
@@ -16,6 +18,7 @@ namespace Game.Scripts
         #region Fields
 
         private WeaponManager _weaponManager;
+        private List<Projectile> _supportedAmmo;
 
         #endregion
 
@@ -23,7 +26,7 @@ namespace Game.Scripts
 
         private void Start()
         {
-            _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform), 2); //todo change constant 3
+            _supportedAmmo = new List<Projectile>();
         }
 
         private void FixedUpdate()
@@ -33,6 +36,8 @@ namespace Game.Scripts
 
         private void Update()
         {
+            if(_weaponManager == null) return;
+            
             if (InputManager.IsShootRequested())
             {
                 ShootProjectile();
@@ -40,8 +45,19 @@ namespace Game.Scripts
 
             if (InputManager.IsSwitchWeaponRequested())
             {
-                SwitchProjectileType();
+                SwitchAmmo();
             }
+        }
+
+        public void InitialWeapon(List<Projectile> supportedAmmo)
+        {
+            if (supportedAmmo == null || supportedAmmo.Count == 0)
+            {
+                throw new Exception("No supported ammo found");
+            }
+            
+            _supportedAmmo = supportedAmmo;
+            _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform,_supportedAmmo[0]), supportedAmmo);
         }
 
         private void Move(float horizontalInput)
@@ -55,9 +71,9 @@ namespace Game.Scripts
             _weaponManager.Weapon.Shoot();
         }
 
-        private void SwitchProjectileType()
+        private void SwitchAmmo()
         {
-            _weaponManager.SwitchToNextProjectileType();
+            _weaponManager.SwitchAmmo();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -65,6 +81,7 @@ namespace Game.Scripts
             other.collider.gameObject.TryGetComponent(out Ball projectile);
             if (projectile != null)
             {
+                //todo
                 // Destroy(gameObject);
             }
         }

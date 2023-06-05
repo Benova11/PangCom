@@ -5,15 +5,41 @@ using UnityEngine;
 namespace Game.Models
 {
     [CreateAssetMenu(fileName = "GameConfigModel", menuName = "Models/GameConfigModel")]
-
     public class GameConfigModel : ScriptableObject
     {
+        #region Editor Components
+
         [SerializeField] private GameMode _gameMode;
+        [SerializeField] private LevelModel _currentLevel;
         [SerializeField] private List<LevelModel> _supportedLevelsModels;
 
-        public int CurrentLevelIndex { get; set; } = 1;
-        
-        public int SupportedLevelsCount => _supportedLevelsModels.Count;
+        #endregion
+
+        #region Properties
+
         public GameMode GameMode => _gameMode;
+
+        public LevelModel CurrentLevel
+        {
+            get { return _currentLevel; }
+            set { _currentLevel = value; }
+        }
+        
+        #endregion
+
+        #region Methods
+
+        public void UpdateNextLevel()
+        {
+            var nextLevelIndex = _currentLevel.LevelIndex + 1;
+            if (nextLevelIndex < _supportedLevelsModels.Count)
+            {
+                _currentLevel = _supportedLevelsModels[nextLevelIndex];
+            }
+        }
+
+        #endregion
+        
+        
     }
 }
