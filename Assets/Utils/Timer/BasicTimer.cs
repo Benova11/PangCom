@@ -27,11 +27,6 @@ namespace Utils.Timer
 
         #region Methods
 
-        protected BasicTimer()
-        {
-            SubscribeToApplicationPause();
-        }
-
         public virtual void StartTimer(int timeToCountInSeconds = 0)
         {
             IsPaused = false;
@@ -57,11 +52,6 @@ namespace Utils.Timer
         protected void NotifyOnTimerTick()
         {
             TimerTick?.Invoke(CurrentTime);
-        }
-
-        private void SubscribeToApplicationPause()
-        {
-            UnityEventsProxy.OnApplicationToggledPause += OnApplicationPause;
         }
 
         protected virtual void OnApplicationPause(bool pauseStatus)

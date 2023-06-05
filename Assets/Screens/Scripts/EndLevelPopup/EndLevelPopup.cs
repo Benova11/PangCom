@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Configs.Levels;
 using Game.Events;
-using Game.Infrastructures.Popups;
 using Screens.Scripts;
 using TMPro;
 using UnityEngine;
