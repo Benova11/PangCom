@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using Game;
 using Game.Configs.Balls;
 using Game.Configs.Levels;
 using Game.Events;
-using Game.Infrastructures.Popups;
 using Game.Models;
 using Game.Scripts;
 using Game.Scripts.Collectables;
@@ -16,6 +13,7 @@ public class LevelManager : MonoBehaviour
 {
     #region Editor Components
 
+    [SerializeField] private Transform _transform;
     [SerializeField] private LevelModel _levelModel;
     [SerializeField] private List<Ball> _initialBalls;
     [SerializeField] private List<Obstacle> _obstacles;
@@ -23,7 +21,9 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Fields
-
+    
+    const int Z_POSITIONS = 0;
+    
     public int _amountOfBallsInstances;
     private CountDownTimer _countDownTimer;
     private List<IDestroyable> _collectables;
@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        AdjustZPosition();
         InitializeTimer();
 
         _amountOfBallsInstances = _initialBalls.Count;
@@ -59,6 +60,13 @@ public class LevelManager : MonoBehaviour
         //go to next level?
 
         //check for how many players?
+    }
+
+    private void AdjustZPosition()
+    {
+        var position = _transform.position;
+        position = new Vector3(position.x, position.y, Z_POSITIONS);
+        _transform.position = position;
     }
 
     private void InitializeTimer()
