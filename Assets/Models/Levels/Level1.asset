@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   _levelIndex: 1
-  _currentScore: 130
-  _remainingTime: 197
-  _initialPlayerHealth: 3
+  _currentScore: 150
+  _remainingTime: 199
+  _initialPlayerHealth: 10
   _timePerLevelSeconds: 200
   _supportedAmmos:
   - {fileID: 7244894031786008088, guid: 9c5cc62cd593c447f8a6f762aa8814af, type: 3}
+  _rewardsChanceRate: 10

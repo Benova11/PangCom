@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
@@ -11,7 +10,7 @@ namespace Game.Infrastructures.Popups
     public static class PopupManagerLocator
     {
         private static IPopupManager _popupManager;
-        
+
         public static async UniTask<IPopupManager> Get()
         {
             if (_popupManager != null)

@@ -84,7 +84,6 @@ namespace Game.Scripts
             if (projectile != null)
             {
                 _currentHealth--;
-                Debug.Log(_currentHealth);
                 if (_currentHealth <= 0)
                 {
                     GameplayEventBus<GameplayEventType,PlayerDeadEventArgs>.Publish(GameplayEventType.PlayerDead, new PlayerDeadEventArgs(this));

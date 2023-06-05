@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Configs.Balls;
+using Game.Configs.Collectable;
 using Game.Configs.Levels;
 using Game.Events;
 using Game.Models;
@@ -42,6 +43,10 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        _collectables = new List<IDestroyable>();
+    }
 
     private void Start()
     {
@@ -51,10 +56,7 @@ public class LevelManager : MonoBehaviour
         _amountOfBallsInstances = _initialBalls.Count;
 
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
-
-        //todo subscribe tor rewards event bus 
-        //keep them in list
-        //destroy whtas lefft onlevel destoy;
+        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
 
         //set hud properties
         //go to next level?
@@ -102,6 +104,11 @@ public class LevelManager : MonoBehaviour
     {
         onLevelEndedCallback?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
     }
+    
+    private void OnCollectableCreated(CollectableEventContent<RewardContent> content)
+    {
+        _collectables.Add(content.Args.Destroyable);
+    }
 
     private void DestroyObstaclesLeft()
     {
@@ -130,6 +137,9 @@ public class LevelManager : MonoBehaviour
     {
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
+        
+        GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
 
         DestroyObstaclesLeft();
         DestroyCollectableLeft();

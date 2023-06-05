@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Game.Configs.Collectable;
 using Game.Infrastructures.Factories.Collectables;
@@ -16,8 +17,8 @@ namespace DefaultNamespace
             {
                 case RewardType.Score:
                     return await CreateScoreReward(position);
-                // case RewardType.Health:
-                // return await CreateScoreReward(position);
+                case RewardType.Health:
+                    return await CreateHealthReward(position);
                 default:
                     return null;
             }
@@ -31,13 +32,12 @@ namespace DefaultNamespace
             return scoreReward;
         }
 
-        //todo?
-        // private async UniTask<Projectile> CreateHealthReward(Transform shootingPoint)
-        // {
-        //     var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.BasicProjectile, shootingPoint.position, Quaternion.identity);
-        //     projectileInstance.TryGetComponent(out BasicProjectile basicProjectile);
-        //
-        //     return basicProjectile;
-        // }
+        private async UniTask<HealthReward> CreateHealthReward(Transform originPoint)
+        {
+            var rewardInstance = await Addressables.InstantiateAsync(RewardsAddressableKeys.ScoreReward, originPoint.position, Quaternion.identity);
+            rewardInstance.TryGetComponent(out HealthReward scoreReward);
+
+            return scoreReward;
+        }
     }
 }

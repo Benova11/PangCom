@@ -8,7 +8,7 @@ namespace Game.Infrastructures
         [SerializeField] private Transform _leftBorder;
         [SerializeField] private Transform _rightBorder;
         [SerializeField] private Transform _bottomBorder;
-        
+
         public void Start()
         {
             AdjustBordersPosition();
@@ -32,12 +32,10 @@ namespace Game.Infrastructures
                 _bottomBorder.position = bottomBorderPosition;
                 _leftBorder.position = leftBorderPosition;
                 _rightBorder.position = rightBorderPosition;
-                
+
                 var mainCameraTransform = mainCamera.transform;
                 mainCameraTransform.position = new Vector3(mainCameraTransform.position.x, mainCameraTransform.position.y, -8f);
             }
-
         }
-        
     }
 }

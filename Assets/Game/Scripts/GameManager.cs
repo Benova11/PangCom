@@ -63,15 +63,18 @@ namespace Game.Scripts
 
         private void CreatePlayers()
         {
-            _currentPlayers = new List<Player>();
+            _currentPlayers ??= new List<Player>();
 
-            for (int i = 0; i < (int)_gameConfigModel.GameMode; i++)
+            var playersToCreate = (int)_gameConfigModel.GameMode - _currentPlayers.Count;
+
+            for (int i = 0; i < playersToCreate; i++)
             {
                 var player = Instantiate(_playerPrefab);
                 player.gameObject.SetActive(true);
                 player.InitialWeapon(_currentLevel.SupportedAmmos);
                 player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);
                 _currentPlayers.Add(player);
+                
                 //todo asign player input (diffrent positions?)
                 //todo instntiate propeiate player prefab
             }
@@ -89,6 +92,8 @@ namespace Game.Scripts
 
         private async void OnCurrentLevelEnded(EndLevelResult endLevelResult)
         {
+            Time.timeScale = 0;
+
             var popupManager = await PopupManagerLocator.Get();
             popupManager.CreateEndLevelPopup(endLevelResult);
         }
@@ -101,6 +106,8 @@ namespace Game.Scripts
             await CreateLevel();
             
             CreatePlayers();
+            
+            Time.timeScale = 1;
         }
 
         private async UniTask ToggleGameRunningState()
@@ -120,6 +127,7 @@ namespace Game.Scripts
         private void OnDestroy()
         {
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Unsubscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
+            GameplayEventBus<GameplayEventType, PlayerDeadEventArgs>.Unsubscribe(GameplayEventType.PlayerDead, OnPlayerDead);
         }
 
         #endregion

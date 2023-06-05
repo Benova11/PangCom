@@ -44,8 +44,11 @@ namespace Game.Scripts.Collectables
                 var scoreReward = await _rewardsFactory.Create(args.OriginTransform, RewardType.Score);
                 scoreReward.Content = new RewardContent
                 {
-                    Amount = 10
+                    Amount = 10,
+                    Destroyable = scoreReward
                 };
+                
+                GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Publish(CollectableEventType.CollectableCreated, new CollectableEventContent<RewardContent>(scoreReward.Content));
             }
         }
         
@@ -57,6 +60,7 @@ namespace Game.Scripts.Collectables
         private void OnDestroy()
         {
             GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
+            GameplayEventBus<CollectableEventType,CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         }
 
         #endregion

@@ -12,10 +12,10 @@ namespace Game.Models
         [SerializeField] private int _levelIndex;
         [SerializeField] private int _currentScore;
         [SerializeField] private int _remainingTime;
-        [SerializeField] private int _initialPlayerHealth;
+        [SerializeField] private int _initialPlayerHealth = 1;
         [SerializeField] private int _timePerLevelSeconds;
         [SerializeField] private List<Projectile> _supportedAmmos;
-        [SerializeField] [Range(0, 10)] private int _rewardsChanceRate;
+        [SerializeField] [Range(0, 10)] private int _rewardsChanceRate = 1;
 
         #endregion
 
