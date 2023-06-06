@@ -17,6 +17,8 @@ namespace Game.Models
 
         #region Properties
 
+        public int CurrentPlayerScore { get; set; }
+
         public LevelModel CurrentLevel => _currentLevel;
 
         public GameMode GameMode
