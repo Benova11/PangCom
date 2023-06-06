@@ -9,7 +9,6 @@ using Game.Models;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Utils.Storage;
 
 namespace Game.Scripts
@@ -19,7 +18,7 @@ namespace Game.Scripts
         #region Editor Comp
 
         [SerializeField] private Player[] _playerPrefabs;
-        [FormerlySerializedAs("_gameConfigModel")] [SerializeField] private GameManagerModel _gameManagerModel;
+        [SerializeField] private GameManagerModel _gameManagerModel;
 
         #endregion
 
@@ -37,18 +36,20 @@ namespace Game.Scripts
         {
             Time.timeScale = 1;
 
-            InitializeLevel();
+            _gameManagerModel.CurrentPlayerScore = 0;
             _leaderboardStorageSystem = new LeaderboardStorageSystem();
+            
+            InitializeLevel();
+            
+            GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
+            GameplayEventBus<GameplayEventType, PlayerDeadEventArgs>.Subscribe(GameplayEventType.PlayerDead, OnPlayerDead);
         }
 
-        private async UniTaskVoid InitializeLevel()
+        private async UniTask InitializeLevel()
         {
             await CreateLevel();
 
             CreatePlayers();
-
-            GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
-            GameplayEventBus<GameplayEventType, PlayerDeadEventArgs>.Subscribe(GameplayEventType.PlayerDead, OnPlayerDead);
         }
 
         private async UniTask CreateLevel()
@@ -116,9 +117,7 @@ namespace Game.Scripts
             Destroy(_currentLevel.gameObject);
             _gameManagerModel.UpdateNextLevel();
 
-            await CreateLevel();
-
-            CreatePlayers();
+            await InitializeLevel();
 
             Time.timeScale = 1;
         }

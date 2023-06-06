@@ -16,7 +16,32 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 9848ac199700442409dbb7654874cdaf
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: b3737d08aa6ef4b6e8bca031ff5bd131
+    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da2362738aa7a4d9894df5fd84e0778f
+    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f5c2c0bc1376417994bce9fd5c59d40
+    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1efbdd7f67f7e478b9505ffa1a574bea
+    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac5c54c2bb45f42679faaf11ee8aecbd
+    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820c6360648414afe8182bc1492d5049, type: 2}
   m_SchemaSet:

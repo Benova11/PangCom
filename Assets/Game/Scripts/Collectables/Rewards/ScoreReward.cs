@@ -13,7 +13,10 @@ namespace Game.Scripts.Collectables.Rewards
 
         public override void DestroySelf()
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
 
         protected override void OnCollisionEnter2D(Collision2D other)

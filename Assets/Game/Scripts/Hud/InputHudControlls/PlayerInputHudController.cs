@@ -1,12 +1,11 @@
 using Game.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Scripts
 {
     public class PlayerInputHudController : MonoBehaviour
     {
-        [FormerlySerializedAs("_gameConfigModel")] [SerializeField] private GameManagerModel _gameManagerModel;
+        [SerializeField] private GameManagerModel _gameManagerModel;
         [SerializeField] private GameObject[] _playerInputHudObjects;
 
         private void Start()

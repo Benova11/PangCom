@@ -16,7 +16,22 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 2effc0668cea446b38a87da3bf8eab34
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: f801d27cda95648d19342913aa21a6e3
+    m_Address: Assets/Screens/Prefabs/EndLevelPopup/EndLevelPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84900d4b4a40a45b2be866879692d319
+    m_Address: Assets/Screens/Prefabs/PauseMenuPopup/PauseMenuPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7ce0754d5ccf4d2e9bd59bacbf413b4
+    m_Address: Assets/Screens/Prefabs/LeaderboardPopup/LeaderboardPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820c6360648414afe8182bc1492d5049, type: 2}
   m_SchemaSet:

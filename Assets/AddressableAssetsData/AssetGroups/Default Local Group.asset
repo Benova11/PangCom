@@ -16,72 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 774bcf2002c4f45d6bcaa54e63c8e267
-  m_SerializeEntries:
-  - m_GUID: b3737d08aa6ef4b6e8bca031ff5bd131
-    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f5c2c0bc1376417994bce9fd5c59d40
-    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX5
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1efbdd7f67f7e478b9505ffa1a574bea
-    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ac5c54c2bb45f42679faaf11ee8aecbd
-    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: da2362738aa7a4d9894df5fd84e0778f
-    m_Address: Assets/Prefabs/Balls/BasicBall/BasicBallX1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9c5cc62cd593c447f8a6f762aa8814af
-    m_Address: Assets/Prefabs/Projectile.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 704163c2bb07941a580227dec4544a79
-    m_Address: Assets/Prefabs/ProjectileSmall.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2f64dda79dbcb4725a0da5a37086e1f6
-    m_Address: Assets/Prefabs/Rewards/ScoreReward.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e09dcbd4c5d1840589fa697f051489d4
-    m_Address: Assets/Prefabs/Levels/Level1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 773a767acdde2469e8de6250420c4818
-    m_Address: Assets/Prefabs/Levels/Level2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f801d27cda95648d19342913aa21a6e3
-    m_Address: Assets/Screens/Prefabs/EndLevelPopup/EndLevelPopup.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 84900d4b4a40a45b2be866879692d319
-    m_Address: Assets/Screens/Prefabs/PauseMenuPopup/PauseMenuPopup.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7ce0754d5ccf4d2e9bd59bacbf413b4
-    m_Address: Assets/Screens/Prefabs/LeaderboardPopup/LeaderboardPopup.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820c6360648414afe8182bc1492d5049, type: 2}
   m_SchemaSet:

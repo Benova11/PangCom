@@ -1,4 +1,3 @@
-using System;
 using Game.Configs;
 using Game.Configs.Levels;
 using Game.Models;
@@ -6,7 +5,6 @@ using Game.Scripts.Flows;
 using Models.Screens.LeaderboardPopup;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Screens.Scripts.MainMenu
@@ -16,7 +14,7 @@ namespace Screens.Scripts.MainMenu
         #region EditorComponents
 
         [SerializeField] private Toggle _twoPlayersToggle;
-        [FormerlySerializedAs("_gameConfigModel")] [SerializeField] private GameManagerModel _gameManagerModel;
+        [SerializeField] private GameManagerModel _gameManagerModel;
         [SerializeField] private LeaderboardPopupModel _leaderboardPopupModel;
         
         #endregion

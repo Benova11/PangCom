@@ -36,7 +36,7 @@ namespace Game.Models
             var nextLevelIndex = _currentLevel.LevelIndex + 1;
 
             _currentLevel = nextLevelIndex < _supportedLevelsModels.Count
-                ? _supportedLevelsModels[nextLevelIndex]
+                ? _supportedLevelsModels[nextLevelIndex - 1]
                 : _supportedLevelsModels[0];
         }
 
