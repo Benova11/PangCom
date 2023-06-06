@@ -35,10 +35,16 @@ namespace Game.Models
 
         #region Methods
 
-        private void OnValidate()
+        public void SetInitialVelocity(BallHorizontalDirection direction)
         {
-            _initialVelocity = new Vector2(_initialHorizontalVelocity, _initialVerticalVelocity);
+            _initialVelocity = new Vector2(_initialHorizontalVelocity * (int)direction, _initialVerticalVelocity);
         }
+        //
+        // private void OnValidate()
+        // {
+        //     _initialVelocity = new Vector2(_initialHorizontalVelocity, _initialVerticalVelocity);
+        //     Debug.Log(_initialVelocity.ToString());
+        // }
 
         #endregion
     }
