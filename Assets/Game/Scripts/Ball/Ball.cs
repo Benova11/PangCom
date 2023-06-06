@@ -2,11 +2,12 @@ using System;
 using Game.Configs.Balls;
 using Game.Events;
 using Game.Models;
+using Game.Scripts.Collectables;
 using UnityEngine;
 
 namespace Game.Scripts
 {
-    public abstract class Ball : MonoBehaviour
+    public abstract class Ball : MonoBehaviour, IDestroyable
     {
         #region Editor Components
 
@@ -26,6 +27,8 @@ namespace Game.Scripts
         #region Events
 
         public event Action<Ball> BallPopped;
+
+        public event Action<IDestroyable> Destroyed;
 
         #endregion
 
@@ -51,8 +54,9 @@ namespace Game.Scripts
         public void SetBallMovement(BallHorizontalDirection direction)
         {
             _horizontalOrientation = direction;
+            // _ballMovementController.SetHorizontalOrientation(direction);
+            _ballModel.SetInitialVelocity(_horizontalOrientation);
             _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel, _horizontalOrientation);
-            _ballMovementController.SetHorizontalOrientation(direction);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -76,6 +80,11 @@ namespace Game.Scripts
                 _rigidBody.gameObject.SetActive(false);
                 _transform.localScale = Vector3.zero;
             }
+        }
+
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
         }
 
         private void OnDestroy()

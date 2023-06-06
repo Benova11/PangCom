@@ -164,4 +164,5 @@ MonoBehaviour:
   _rigidBody: {fileID: 7063437883307340697}
   _transform: {fileID: 1970800471540886113}
   _ballModel: {fileID: 11400000, guid: 567746ba8884745bf8b20bcf659c991a, type: 2}
+  _horizontalOrientation: 1
   _spriteRenderer: {fileID: 0}

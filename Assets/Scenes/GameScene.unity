@@ -170,7 +170,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220152997}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -402,6 +402,7 @@ MonoBehaviour:
   - {fileID: 5056486803674971050, guid: 944cb8ce90ff3466781d4a20e99641be, type: 3}
   - {fileID: 5056486803674971050, guid: d783f3545f3944a4f9dc6c190c0557e3, type: 3}
   _gameConfigModel: {fileID: 11400000, guid: 0f19d52deaa69437a84dc5829923b4b1, type: 2}
+  _leaderboardPopupModel: {fileID: 11400000, guid: 45350ae35186842c3af1266263bacebc, type: 2}
 --- !u!1001 &564852621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -410,6 +411,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 859428454}
     m_Modifications:
+    - target: {fileID: 2562718069983127008, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+      propertyPath: button.m_key
+      value: Shoot2
+      objectReference: {fileID: 0}
     - target: {fileID: 2594318624753686693, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: xAxis.m_key
       value: Horizontal2
@@ -448,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 550
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.y
@@ -719,7 +724,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 500
+  m_Spacing: 400
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -865,6 +870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerControllers
       objectReference: {fileID: 0}
+    - target: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -895,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 550
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.y

@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
 
     private async void OnBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
-        await HandleBallPopped(destroyBallEventArgs);
+        _currentBalls = await HandleBallPopped(destroyBallEventArgs);
 
         if (_currentBalls.Count == 0)
         {
@@ -84,9 +84,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private async UniTask HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
+    private async UniTask<List<Ball>> HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
-        _currentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
+        var newCurrentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
+        _currentBalls.Remove(destroyBallEventArgs.Ball);
+        
+        return newCurrentBalls;
     }
 
     private void OnTimerTick(int remainingTime)
@@ -106,7 +109,14 @@ public class LevelManager : MonoBehaviour
 
     private void OnCollectableCreated(CollectableEventContent<RewardContent> content)
     {
+        var collectable = content.Args.Destroyable;
+        collectable.Destroyed += OnCollectableCollected;
         _collectables.Add(content.Args.Destroyable);
+    }
+    
+    private void OnCollectableCollected(IDestroyable reward)
+    {
+        _collectables.Remove(reward);
     }
 
     private void DestroyObstaclesLeft()
@@ -128,7 +138,18 @@ public class LevelManager : MonoBehaviour
 
         foreach (var collectable in _collectables)
         {
+            collectable.Destroyed -= OnCollectableCollected;
             collectable?.DestroySelf();
+        }
+    }
+    
+    private void DestroyBallsLeft()
+    {
+        if (_currentBalls == null) return;
+
+        foreach (var ball in _currentBalls)
+        {
+            ball.DestroySelf();
         }
     }
 
@@ -140,6 +161,7 @@ public class LevelManager : MonoBehaviour
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
         GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
 
+        DestroyBallsLeft();
         DestroyObstaclesLeft();
         DestroyCollectableLeft();
     }

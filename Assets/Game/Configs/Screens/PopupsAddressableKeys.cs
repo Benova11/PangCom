@@ -4,6 +4,7 @@ namespace Game.Configs.Screens
     {
         public const string EndLevelPopup = "Assets/Screens/Prefabs/EndLevelPopup/EndLevelPopup.prefab";
         public const string PauseMenuPopup = "Assets/Screens/Prefabs/PauseMenuPopup/PauseMenuPopup.prefab";
+        public const string LeaderboardPopupView = "Assets/Screens/Prefabs/LeaderboardPopup/LeaderboardPopup.prefab";
 
     }
 }

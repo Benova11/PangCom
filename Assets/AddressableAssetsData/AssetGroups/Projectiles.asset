@@ -16,17 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c731f45e914474d90b1df9c45c2394f9
-  m_SerializeEntries:
-  - m_GUID: 9c5cc62cd593c447f8a6f762aa8814af
-    m_Address: Assets/Prefabs/Projectile.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 704163c2bb07941a580227dec4544a79
-    m_Address: Assets/Prefabs/ProjectileSmall.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820c6360648414afe8182bc1492d5049, type: 2}
   m_SchemaSet:
