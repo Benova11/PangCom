@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Configs.Levels;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Game.Models
         [SerializeField] private GameMode _gameMode;
         [SerializeField] private LevelModel _currentLevel;
         [SerializeField] private List<LevelModel> _supportedLevelsModels;
+        public event Action<LevelModel> LevelChanged;
 
         #endregion
 
@@ -38,6 +40,8 @@ namespace Game.Models
             _currentLevel = nextLevelIndex < _supportedLevelsModels.Count
                 ? _supportedLevelsModels[nextLevelIndex - 1]
                 : _supportedLevelsModels[0];
+            
+            LevelChanged?.Invoke(_currentLevel);
         }
 
         #endregion

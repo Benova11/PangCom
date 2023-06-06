@@ -92,7 +92,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnTimerTick(int remainingTime)
     {
-        _levelModel.RemainingTime = remainingTime;
+        _levelModel.UpdateLevelTime(remainingTime);
     }
 
     private void OnTimesUp()

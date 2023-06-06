@@ -54,7 +54,7 @@ namespace Game.Scripts.Collectables
         
         private void OnRewardCollected(CollectableEventContent<RewardContent> content)
         {
-            _gameManager.CurrentLevel.CurrentScore += content.Args.Amount;
+            _gameManager.CurrentLevel.AddToLevelScore(content.Args.Amount);
         }
 
         private void OnDestroy()

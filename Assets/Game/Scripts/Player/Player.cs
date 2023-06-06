@@ -26,6 +26,12 @@ namespace Game.Scripts
 
         #endregion
 
+        #region MyRegion
+
+        public PlayerInputOrder InputOrder => _inputOrder;
+
+        #endregion
+
         #region Methods
 
         private void Start()

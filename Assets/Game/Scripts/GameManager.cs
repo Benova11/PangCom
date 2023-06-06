@@ -59,6 +59,7 @@ namespace Game.Scripts
 
             _currentLevel = levelManager;
             _currentLevel.LevelEnded += OnCurrentLevelEnded;
+            _gameManagerModel.CurrentLevel.ResetLevel();
         }
 
         private void CreatePlayers()
@@ -69,13 +70,25 @@ namespace Game.Scripts
 
             for (int i = 0; i < playersToCreate; i++)
             {
-                CreatePlayerInstance(i);
+                if (playersToCreate > 1)
+                {
+                    CreatePlayerInstance(i);
+                }
+                else if(_gameManagerModel.GameMode == GameMode.TwoPlayers)
+                {
+                    RevivePlayerForNextLevel();
+                }
             }
         }
 
-        private void CreatePlayerInstance(int i)
+        private void RevivePlayerForNextLevel()
         {
-            var player = Instantiate(_playerPrefabs[i]);
+            CreatePlayerInstance((int)(_currentPlayers[0].InputOrder == PlayerInputOrder.Input1 ? PlayerInputOrder.Input2 : PlayerInputOrder.Input1) - 1);
+        }
+
+        private void CreatePlayerInstance(int prefabIndex)
+        {
+            var player = Instantiate(_playerPrefabs[prefabIndex]);
 
             player.gameObject.SetActive(true);
             player.InitialWeapon(_currentLevel.SupportedAmmos);

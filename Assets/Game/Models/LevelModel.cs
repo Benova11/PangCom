@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Scripts;
 using UnityEngine;
@@ -25,17 +26,9 @@ namespace Game.Models
 
         public int TimePerLevel => _timePerLevelSeconds;
 
-        public int CurrentScore
-        {
-            get => _currentScore;
-            set => _currentScore = value;
-        }
+        public int CurrentScore => _currentScore;
 
-        public int RemainingTime
-        {
-            get => _remainingTime;
-            set => _remainingTime = value;
-        }
+        public int RemainingTime => _remainingTime;
 
         public int RewardsChanceRate => _rewardsChanceRate;
         public int InitialPlayerHealth => _initialPlayerHealth;
@@ -43,9 +36,36 @@ namespace Game.Models
 
         #endregion
 
-        public void Reset()
+        #region Events
+
+        public event Action LevelModelUpdated;
+
+        #endregion
+
+        #region Methods
+
+        public void AddToLevelScore(int score)
         {
-            throw new System.NotImplementedException();
+            _currentScore = score;
+            LevelModelUpdated?.Invoke();
+        }
+        
+        public void UpdateLevelTime(int time)
+        {
+            _remainingTime = time;
+            LevelModelUpdated?.Invoke();
+        }
+
+        #endregion
+
+        public void OnLevelModeUpdated()
+        {
+            LevelModelUpdated?.Invoke();
+        }
+
+        public void ResetLevel()
+        {
+            _currentScore = 0;
         }
     }
 }
