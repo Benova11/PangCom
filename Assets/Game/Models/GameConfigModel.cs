@@ -17,14 +17,14 @@ namespace Game.Models
 
         #region Properties
 
-        public GameMode GameMode => _gameMode;
+        public LevelModel CurrentLevel => _currentLevel;
 
-        public LevelModel CurrentLevel
+        public GameMode GameMode
         {
-            get { return _currentLevel; }
-            set { _currentLevel = value; }
+            get => _gameMode;
+            set => _gameMode = value;
         }
-        
+
         #endregion
 
         #region Methods
@@ -32,14 +32,12 @@ namespace Game.Models
         public void UpdateNextLevel()
         {
             var nextLevelIndex = _currentLevel.LevelIndex + 1;
-            
-            _currentLevel = nextLevelIndex < _supportedLevelsModels.Count 
-                ? _supportedLevelsModels[nextLevelIndex] 
+
+            _currentLevel = nextLevelIndex < _supportedLevelsModels.Count
+                ? _supportedLevelsModels[nextLevelIndex]
                 : _supportedLevelsModels[0];
         }
 
         #endregion
-        
-        
     }
 }

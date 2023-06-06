@@ -54,7 +54,6 @@ namespace Game.Scripts
         public void SetBallMovement(BallHorizontalDirection direction)
         {
             _horizontalOrientation = direction;
-            // _ballMovementController.SetHorizontalOrientation(direction);
             _ballModel.SetInitialVelocity(_horizontalOrientation);
             _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel, _horizontalOrientation);
         }
@@ -84,7 +83,10 @@ namespace Game.Scripts
 
         public void DestroySelf()
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnDestroy()

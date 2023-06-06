@@ -87,6 +87,7 @@ public class LevelManager : MonoBehaviour
     private async UniTask<List<Ball>> HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
         var newCurrentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
+        destroyBallEventArgs.Ball.Destroyed -= OnCollectableCollected;
         _currentBalls.Remove(destroyBallEventArgs.Ball);
         
         return newCurrentBalls;
