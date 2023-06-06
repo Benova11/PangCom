@@ -138,6 +138,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (var collectable in _collectables)
         {
+            collectable.Destroyed -= OnCollectableCollected;
             collectable?.DestroySelf();
         }
     }
