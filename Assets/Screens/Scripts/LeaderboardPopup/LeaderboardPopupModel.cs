@@ -15,8 +15,8 @@ namespace Models.Screens.LeaderboardPopup
         public async UniTask<List<PlayerLeaderboardView>> GetLeaderboardChart()
         {
             var leaderboardChart = await GetLeaderboardChartData();
-            var leaderboardPlayersList = PopulateLeaderboardPlayersList(leaderboardChart);
-            return leaderboardPlayersList;
+            var leaderboardPlayersViewList = PopulateLeaderboardPlayersList(leaderboardChart);
+            return leaderboardPlayersViewList;
         }
 
         private async UniTask <List<LeaderboardPlayer>> GetLeaderboardChartData()

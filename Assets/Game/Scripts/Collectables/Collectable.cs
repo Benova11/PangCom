@@ -9,7 +9,7 @@ namespace Game.Scripts.Collectables
         public abstract T Content { get; set; }
         
         public abstract void DestroySelf();
-        public abstract event Action OnDestroyed;
+        public abstract event Action<IDestroyable> Destroyed;
         protected abstract void OnCollisionEnter2D(Collision2D other);
     }
 }

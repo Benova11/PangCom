@@ -737,6 +737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7533675655182380956}
   - component: {fileID: 7181854218461703661}
+  - component: {fileID: 8857223119333601188}
   m_Layer: 5
   m_Name: LeaderboardPopup
   m_TagString: Untagged
@@ -774,6 +775,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249822167742133777}
   m_CullTransparentMesh: 1
+--- !u!114 &8857223119333601188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249822167742133777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef794dd397cc42728da5215cebbf340d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8528836811366778129
 GameObject:
   m_ObjectHideFlags: 0

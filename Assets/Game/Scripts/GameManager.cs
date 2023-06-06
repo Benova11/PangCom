@@ -6,6 +6,7 @@ using Game.Configs.Screens.LeaderboardPopup;
 using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
+using Models.Screens.LeaderboardPopup;
 using Screens.Scripts.PauseMenu;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -19,7 +20,7 @@ namespace Game.Scripts
 
         [SerializeField] private Player[] _playerPrefabs;
         [SerializeField] private GameConfigModel _gameConfigModel;
-
+        [SerializeField] private LeaderboardPopupModel _leaderboardPopupModel;
         #endregion
 
         #region Fields
@@ -35,8 +36,19 @@ namespace Game.Scripts
 
         private void Start()
         {
+            Time.timeScale = 1;
+
+            // var popupManager = await PopupManagerLocator.Get();
             InitializeLevel();
             _leaderboardStorageSystem = new LeaderboardStorageSystem();
+            // init();
+        }
+
+        private async UniTaskVoid init()
+        {
+            var popupManager = await PopupManagerLocator.Get();
+            popupManager.CreateLeaderboardPopup(_leaderboardPopupModel);
+            // popupManager.c
         }
         
         private void Update()
@@ -105,8 +117,11 @@ namespace Game.Scripts
 
             var popupManager = await PopupManagerLocator.Get();
             popupManager.CreateEndLevelPopup(endLevelResult);
-            
-            _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score,"Player"+DateTime.Now));
+
+            if (endLevelResult.IsSuccess)
+            {
+                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score,"Player"+DateTime.Now));
+            }
         }
         
         private async void OnNextLevelRequested(NextLevelEventArgs args)

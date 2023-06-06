@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Screens.Scripts
 {
@@ -7,7 +8,8 @@ namespace Screens.Scripts
     {
         public override UniTask Show(List<PlayerLeaderboardView> playersList)
         {
-            throw new System.NotImplementedException();
+            Debug.Log(playersList);
+            return UniTask.CompletedTask;
         }
 
         public override void ClosePopup()

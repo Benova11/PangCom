@@ -6,6 +6,7 @@ using Screens.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Game.Screens.Popups
 {
@@ -15,6 +16,7 @@ namespace Game.Screens.Popups
 
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _resultText;
+        [SerializeField] private GameObject _nextLevelButton;
 
         #endregion
 
@@ -30,9 +32,14 @@ namespace Game.Screens.Popups
         {
             _endLevelResult = endLevelResult;
 
-            _scoreText.text = endLevelResult.Score.ToString();
+            _scoreText.text = "Score: " + endLevelResult.Score;
             _resultText.text = endLevelResult.IsSuccess ? "Success!" : "Fail";
 
+            if (!endLevelResult.IsSuccess)
+            {
+                _nextLevelButton.SetActive(false);
+            }
+            
             return UniTask.CompletedTask;
         }
 

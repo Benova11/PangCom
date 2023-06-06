@@ -402,6 +402,7 @@ MonoBehaviour:
   - {fileID: 5056486803674971050, guid: 944cb8ce90ff3466781d4a20e99641be, type: 3}
   - {fileID: 5056486803674971050, guid: d783f3545f3944a4f9dc6c190c0557e3, type: 3}
   _gameConfigModel: {fileID: 11400000, guid: 0f19d52deaa69437a84dc5829923b4b1, type: 2}
+  _leaderboardPopupModel: {fileID: 11400000, guid: 45350ae35186842c3af1266263bacebc, type: 2}
 --- !u!1001 &564852621
 PrefabInstance:
   m_ObjectHideFlags: 0

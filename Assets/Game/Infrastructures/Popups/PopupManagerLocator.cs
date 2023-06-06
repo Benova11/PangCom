@@ -20,8 +20,8 @@ namespace Game.Infrastructures.Popups
 
             await SceneManager.LoadSceneAsync(SystemSceneIndexes.POPUP_MANAGER_BUILD_ID, LoadSceneMode.Additive);
             var manager = Object.FindObjectsOfType<MonoBehaviour>().OfType<IPopupManager>().FirstOrDefault();
-
-            _popupManager = manager; //?? throw new Exception("Can't locate PopupManager service");
+            _popupManager = null;
+            // _popupManager = manager; //?? throw new Exception("Can't locate PopupManager service");
             return manager;
         }
     }

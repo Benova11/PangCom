@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Collectables;
 using UnityEngine;
 
@@ -26,5 +27,7 @@ namespace Game.Scripts
         {
             Destroy(gameObject);
         }
+
+        public event Action<IDestroyable> Destroyed;
     }
 }

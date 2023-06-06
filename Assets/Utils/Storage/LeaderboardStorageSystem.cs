@@ -32,7 +32,7 @@ namespace Utils.Storage
 
         #region Methods
 
-        public async UniTaskVoid Save(LeaderboardPlayer leaderboardPlayer)
+        public async UniTask Save(LeaderboardPlayer leaderboardPlayer)
         {
             var leaderboardPlayers = await Load();
             leaderboardPlayers ??= new();
