@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d8bdc4c48479488a330854a1b2805, type: 3}
   m_Name: LeaderboardPopupModel
   m_EditorClassIdentifier: 
-  _playerLeaderboardViewPrefab: {fileID: 0}
+  _playerLeaderboardViewPrefab: {fileID: -5792641491085530393, guid: 383a763c5b67948bd85523e816140585, type: 3}

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Models
 {
     [CreateAssetMenu(fileName = "GameConfigModel", menuName = "Models/GameConfigModel")]
-    public class GameConfigModel : ScriptableObject
+    public class GameManagerModel : ScriptableObject
     {
         #region Editor Components
 

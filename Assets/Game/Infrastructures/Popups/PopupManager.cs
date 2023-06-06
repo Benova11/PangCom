@@ -20,36 +20,32 @@ namespace Game.Infrastructures.Popups
 
         #region Methods
 
-        // private void Awake()
-        // {
-        //     DontDestroyOnLoad(this);
-        // }
-
         public async UniTask<EndLevelPopup> CreateEndLevelPopup(EndLevelResult endLevelResult)
         {
             var popupInstance = await Addressables.InstantiateAsync(PopupsAddressableKeys.EndLevelPopup, _parentTransform);
             popupInstance.TryGetComponent(out EndLevelPopup endLevelPopup);
 
-            endLevelPopup.Show(endLevelResult);
+            await endLevelPopup.Show(endLevelResult);
             return endLevelPopup;
         }
-        
+
         public async UniTask<PauseMenuPopup> CreatePauseMenuPopup(CurrentLevelState currentLevelState)
         {
             var popupInstance = await Addressables.InstantiateAsync(PopupsAddressableKeys.PauseMenuPopup, _parentTransform);
             popupInstance.TryGetComponent(out PauseMenuPopup endLevelPopup);
 
-            endLevelPopup.Show(currentLevelState);
+            await endLevelPopup.Show(currentLevelState);
             return endLevelPopup;
         }
-        
+
         public async UniTask<LeaderboardPopupPresenter> CreateLeaderboardPopup(LeaderboardPopupModel leaderboardPopupModel)
         {
             var popupInstance = await Addressables.InstantiateAsync(PopupsAddressableKeys.LeaderboardPopupView, _parentTransform);
             popupInstance.TryGetComponent(out LeaderboardPopupView leaderboardPopup);
+
             return new LeaderboardPopupPresenter(leaderboardPopup, leaderboardPopupModel);
         }
-        
+
         #endregion
     }
 }

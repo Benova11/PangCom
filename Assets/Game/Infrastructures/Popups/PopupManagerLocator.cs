@@ -24,5 +24,11 @@ namespace Game.Infrastructures.Popups
             
             return manager;
         }
+        
+        public static void Unload()
+        {
+            _popupManager = null;
+            SceneManager.UnloadSceneAsync(SystemSceneIndexes.POPUP_MANAGER_BUILD_ID);
+        }
     }
 }

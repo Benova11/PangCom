@@ -11,6 +11,5 @@ namespace Game.Infrastructures.Popups
     {
         UniTask<EndLevelPopup> CreateEndLevelPopup(EndLevelResult endLevelResult);
         UniTask<PauseMenuPopup> CreatePauseMenuPopup(CurrentLevelState currentLevelState);
-        UniTask<LeaderboardPopupPresenter> CreateLeaderboardPopup(LeaderboardPopupModel leaderboardPopupModel);
-    }
+        UniTask<LeaderboardPopupPresenter> CreateLeaderboardPopup(LeaderboardPopupModel leaderboardPopupModel); }
 }

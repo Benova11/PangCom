@@ -42,5 +42,10 @@ namespace Game.Models
         public List<Projectile> SupportedAmmos => _supportedAmmos;
 
         #endregion
+
+        public void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

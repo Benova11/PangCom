@@ -37,7 +37,7 @@ namespace Utils.Timer
 
         #endregion
 
-        public override void StartTimer(int timeToCountInSeconds)
+        public override async void StartTimer(int timeToCountInSeconds)
         {
             StopTimer();
 
@@ -52,7 +52,7 @@ namespace Utils.Timer
             else
             {
                 SetToken();
-                RunTimer();
+                await RunTimer();
                 NotifyOnTimerTick();
             }
 

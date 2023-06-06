@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
@@ -10,6 +9,7 @@ using Game.Models;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Utils.Storage;
 
 namespace Game.Scripts
@@ -19,7 +19,7 @@ namespace Game.Scripts
         #region Editor Comp
 
         [SerializeField] private Player[] _playerPrefabs;
-        [SerializeField] private GameConfigModel _gameConfigModel;
+        [FormerlySerializedAs("_gameConfigModel")] [SerializeField] private GameManagerModel _gameManagerModel;
 
         #endregion
 
@@ -53,7 +53,7 @@ namespace Game.Scripts
 
         private async UniTask CreateLevel()
         {
-            var levelInstance = await Addressables.InstantiateAsync(LevelsAddressableKeys.LevelPrefab + _gameConfigModel.CurrentLevel.LevelIndex);
+            var levelInstance = await Addressables.InstantiateAsync(LevelsAddressableKeys.LevelPrefab + _gameManagerModel.CurrentLevel.LevelIndex);
             levelInstance.TryGetComponent(out LevelManager levelManager);
 
             _currentLevel = levelManager;
@@ -64,7 +64,7 @@ namespace Game.Scripts
         {
             _currentPlayers ??= new List<Player>();
 
-            var playersToCreate = (int)_gameConfigModel.GameMode - _currentPlayers.Count;
+            var playersToCreate = (int)_gameManagerModel.GameMode - _currentPlayers.Count;
 
             for (int i = 0; i < playersToCreate; i++)
             {
@@ -78,7 +78,7 @@ namespace Game.Scripts
 
             player.gameObject.SetActive(true);
             player.InitialWeapon(_currentLevel.SupportedAmmos);
-            player.SetInitialHealth(_gameConfigModel.CurrentLevel.InitialPlayerHealth);
+            player.SetInitialHealth(_gameManagerModel.CurrentLevel.InitialPlayerHealth);
 
             _currentPlayers.Add(player);
         }
@@ -98,18 +98,23 @@ namespace Game.Scripts
             Time.timeScale = 0;
 
             var popupManager = await PopupManagerLocator.Get();
-            popupManager.CreateEndLevelPopup(endLevelResult);
+            await popupManager.CreateEndLevelPopup(endLevelResult);
 
             if (endLevelResult.IsSuccess)
             {
-                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score, "Player" + DateTime.Now));
+                _gameManagerModel.CurrentPlayerScore += endLevelResult.Score;
+                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score, "No Unique Id"));
+            }
+            else
+            {
+                _gameManagerModel.CurrentPlayerScore = 0;
             }
         }
 
         private async void OnNextLevelRequested(NextLevelEventArgs args)
         {
             Destroy(_currentLevel.gameObject);
-            _gameConfigModel.UpdateNextLevel();
+            _gameManagerModel.UpdateNextLevel();
 
             await CreateLevel();
 

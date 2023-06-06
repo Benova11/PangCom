@@ -11,15 +11,27 @@ namespace Models.Screens.LeaderboardPopup
     public class LeaderboardPopupModel : ScriptableObject
     {
         [SerializeField] private PlayerLeaderboardView _playerLeaderboardViewPrefab;
-
+        
+        private List<LeaderboardPlayer> _sortedLeaderboardPlayersList;
+        
         public async UniTask<List<PlayerLeaderboardView>> GetLeaderboardChart()
         {
-            var leaderboardChart = await GetLeaderboardChartData();
+            _sortedLeaderboardPlayersList = await GetLeaderboardChartData();
+            SortLeaderboardPlayersListByRank();
+            
+            var leaderboardChart = _sortedLeaderboardPlayersList;
             var leaderboardPlayersViewList = PopulateLeaderboardPlayersList(leaderboardChart);
+            
             return leaderboardPlayersViewList;
         }
+        
+        private  void SortLeaderboardPlayersListByRank()
+        {
+            _sortedLeaderboardPlayersList.Sort((a, b) => a.Score.CompareTo(b.Score));
+            _sortedLeaderboardPlayersList.Reverse();
+        }
 
-        private async UniTask <List<LeaderboardPlayer>> GetLeaderboardChartData()
+        private async UniTask<List<LeaderboardPlayer>> GetLeaderboardChartData()
         {
             var leaderboardStorageSystem = new LeaderboardStorageSystem();
             var leaderboardPlayersList = await leaderboardStorageSystem.Load();
@@ -29,9 +41,16 @@ namespace Models.Screens.LeaderboardPopup
 
         private List<PlayerLeaderboardView> PopulateLeaderboardPlayersList(List<LeaderboardPlayer> leaderboardChart)
         {
-            return null;
-        }
+            var playerLeaderboardViewList = new List<PlayerLeaderboardView>();
 
-        public PlayerLeaderboardView PlayerLeaderboardViewPrefab => _playerLeaderboardViewPrefab;
+            foreach (var player in leaderboardChart)
+            {
+                var playerView = Instantiate(_playerLeaderboardViewPrefab);
+                playerLeaderboardViewList.Add(playerView);
+                playerView.SetData(leaderboardChart.IndexOf(player) + 1, player.Name, player.Score);
+            }
+
+            return playerLeaderboardViewList;
+        }
     }
 }

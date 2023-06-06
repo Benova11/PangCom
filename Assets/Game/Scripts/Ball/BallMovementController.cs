@@ -20,7 +20,7 @@ namespace Game.Scripts
 
         #region Methods
 
-        public void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel, BallHorizontalDirection horizontalOrientation)
+        public async void InitializeMovement(Transform transform, Rigidbody2D rigidBody, BallModel ballModel, BallHorizontalDirection horizontalOrientation)
         {
             _ballModel = ballModel;
             _transform = transform;
@@ -28,7 +28,7 @@ namespace Game.Scripts
             _horizontalOrientation = horizontalOrientation;
             _cancellationTokenSource = new CancellationTokenSource();
 
-            UpdateBodyVelocity();
+            await UpdateBodyVelocity();
         }
         
         public void SetHorizontalOrientation(BallHorizontalDirection direction)

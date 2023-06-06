@@ -17,7 +17,7 @@ namespace Screens.Scripts
 
         private async void ShowPopup()
         {
-            _view.Show(await _model.GetLeaderboardChart());
+            await _view.Show(await _model.GetLeaderboardChart());
         }
     }
 }

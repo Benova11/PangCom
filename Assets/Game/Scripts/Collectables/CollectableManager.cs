@@ -10,7 +10,7 @@ namespace Game.Scripts.Collectables
     {
         #region Editor Components
 
-        [SerializeField] private GameConfigModel _gameConfig;
+        [SerializeField] private GameManagerModel _gameManager;
         
         #endregion
 
@@ -37,7 +37,7 @@ namespace Game.Scripts.Collectables
         private async void OnBallDestroyed(DestroyBallEventArgs args)
         {
             var rnd = Random.Range(0,10);
-            var rewardInstantiationChance = _gameConfig.CurrentLevel.RewardsChanceRate;
+            var rewardInstantiationChance = _gameManager.CurrentLevel.RewardsChanceRate;
             
             if (rnd < rewardInstantiationChance)
             {
@@ -54,7 +54,7 @@ namespace Game.Scripts.Collectables
         
         private void OnRewardCollected(CollectableEventContent<RewardContent> content)
         {
-            _gameConfig.CurrentLevel.CurrentScore += content.Args.Amount;
+            _gameManager.CurrentLevel.CurrentScore += content.Args.Amount;
         }
 
         private void OnDestroy()
