@@ -102,6 +102,9 @@ public class LevelManager : MonoBehaviour
 
     public void OnPlayersDead(Action<EndLevelResult> onLevelEndedCallback)
     {
+        DestroyBallsLeft();
+        DestroyObstaclesLeft();
+        DestroyCollectableLeft();
         onLevelEndedCallback?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
     }
 
@@ -159,9 +162,9 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
 
-        DestroyBallsLeft();
-        DestroyObstaclesLeft();
-        DestroyCollectableLeft();
+        // DestroyBallsLeft();
+        // DestroyObstaclesLeft();
+        // DestroyCollectableLeft();
         
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
         GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);

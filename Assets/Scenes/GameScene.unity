@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerControllers2
       objectReference: {fileID: 0}
+    - target: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -718,11 +722,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 90
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 3
   m_Spacing: 400
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0

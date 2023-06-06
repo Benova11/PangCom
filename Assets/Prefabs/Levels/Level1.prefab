@@ -115,8 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 5444878724430014455}
   _levelModel: {fileID: 11400000, guid: fc88858a75a154158b40dd00f347afad, type: 2}
-  _currentBalls:
-  - {fileID: 9040243565469212438}
+  _currentBalls: []
   _obstacles:
   - {fileID: 7125748337241068785}
   - {fileID: 5424782153372738427}
@@ -453,17 +452,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1970800471540886113, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
   m_PrefabInstance: {fileID: 4496985124815442809}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9040243565469212438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4836273935301119087, guid: 1efbdd7f67f7e478b9505ffa1a574bea, type: 3}
-  m_PrefabInstance: {fileID: 4496985124815442809}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da26af4fba6d84355b9cd558b6068dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6747988510856750120
 PrefabInstance:
   m_ObjectHideFlags: 0

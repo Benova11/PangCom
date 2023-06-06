@@ -48,13 +48,13 @@ namespace Game.Scripts
 
         private void Start()
         {
+            _ballModel.AdjustInitialVelocity();
             SetBallMovement(_horizontalOrientation);
         }
 
         public void SetBallMovement(BallHorizontalDirection direction)
         {
             _horizontalOrientation = direction;
-            _ballModel.SetInitialVelocity(_horizontalOrientation);
             _ballMovementController.InitializeMovement(_transform, _rigidBody, _ballModel, _horizontalOrientation);
         }
 
@@ -77,8 +77,6 @@ namespace Game.Scripts
                 _transform.localScale = Vector3.zero;
             }
             GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
-            // BallPopped?.Invoke(this);
-
         }
 
         public void DestroySelf()
