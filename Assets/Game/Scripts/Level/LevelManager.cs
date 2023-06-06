@@ -87,9 +87,6 @@ public class LevelManager : MonoBehaviour
     private async UniTask<List<Ball>> HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
         var newCurrentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
-        destroyBallEventArgs.Ball.Destroyed -= OnCollectableCollected;
-        _currentBalls.Remove(destroyBallEventArgs.Ball);
-        
         return newCurrentBalls;
     }
 
@@ -140,7 +137,7 @@ public class LevelManager : MonoBehaviour
         foreach (var collectable in _collectables)
         {
             collectable.Destroyed -= OnCollectableCollected;
-            collectable?.DestroySelf();
+            collectable.DestroySelf();
         }
     }
     
@@ -150,7 +147,10 @@ public class LevelManager : MonoBehaviour
 
         foreach (var ball in _currentBalls)
         {
-            ball.DestroySelf();
+            if (ball.gameObject != null)
+            {
+                Destroy(ball.gameObject);
+            }
         }
     }
 
@@ -159,11 +159,11 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
 
-        GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
-        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
-
         DestroyBallsLeft();
         DestroyObstaclesLeft();
         DestroyCollectableLeft();
+        
+        GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
     }
 }

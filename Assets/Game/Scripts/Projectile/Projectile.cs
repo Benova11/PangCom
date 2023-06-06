@@ -9,6 +9,7 @@ namespace Game.Scripts
     {
         #region Editor Components
 
+        [SerializeField] protected int _speed = 6;
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private ProjectileType _projectileType;
 
@@ -35,8 +36,13 @@ namespace Game.Scripts
 
         private void FixedUpdate()
         {
-            Vector2 velocity = new Vector2(_rigidBody.velocity.x, 6);
-            _rigidBody.velocity = velocity;
+            Act();
+        }
+
+        protected virtual void Act()
+        {
+            Vector2 velocity = new Vector2(_rigidBody.velocity.x, _speed);
+            _rigidBody.velocity = velocity; 
         }
 
         #endregion

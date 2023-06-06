@@ -14,17 +14,17 @@ namespace Game.Infrastructures.Factories.Projectiles
             {
                 case ProjectileType.Basic:
                     return await CreateBasicProjectile(position);
-                case ProjectileType.Small:
-                    return await CreateSmallProjectile(position);
+                case ProjectileType.TimedExpanding:
+                    return await CreateTimedExpandingProjectile(position);
                 default:
                     return null;
             }
         }
 
-        private async UniTask<Projectile> CreateSmallProjectile(Transform shootingPoint)
+        private async UniTask<Projectile> CreateTimedExpandingProjectile(Transform shootingPoint)
         {
-            var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.SmallProjectile, shootingPoint.position, Quaternion.identity);
-            projectileInstance.TryGetComponent(out SmallProjectile smallProjectile);
+            var projectileInstance = await Addressables.InstantiateAsync(ProjectilesAddressableKeys.TimedExpandingProjectile, shootingPoint.position, Quaternion.identity);
+            projectileInstance.TryGetComponent(out TimedExpandingProjectile smallProjectile);
 
             return smallProjectile;
         }

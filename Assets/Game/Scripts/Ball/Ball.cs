@@ -71,14 +71,14 @@ namespace Game.Scripts
 
         private void OnProjectileHit()
         {
-            GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
-            BallPopped?.Invoke(this);
-
             if (_ballModel.BallSize != BallSize.X1)
             {
                 _rigidBody.gameObject.SetActive(false);
                 _transform.localScale = Vector3.zero;
             }
+            GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Publish(GameplayEventType.BallDestroyed, new DestroyBallEventArgs(_transform, this));
+            // BallPopped?.Invoke(this);
+
         }
 
         public void DestroySelf()

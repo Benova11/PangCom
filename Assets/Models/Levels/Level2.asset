@@ -15,9 +15,8 @@ MonoBehaviour:
   _levelIndex: 2
   _currentScore: 0
   _remainingTime: 134
-  _initialPlayerHealth: 10
+  _initialPlayerHealth: 3
   _timePerLevelSeconds: 150
   _supportedAmmos:
   - {fileID: 7244894031786008088, guid: 9c5cc62cd593c447f8a6f762aa8814af, type: 3}
-  - {fileID: 7244894031786008088, guid: 704163c2bb07941a580227dec4544a79, type: 3}
-  _rewardsChanceRate: 10
+  _rewardsChanceRate: 4

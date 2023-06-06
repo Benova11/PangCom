@@ -412,7 +412,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2562718069983127008, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: button.m_key
-      value: Shoot2
+      value: Fire2
       objectReference: {fileID: 0}
     - target: {fileID: 2594318624753686693, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: xAxis.m_key
@@ -865,6 +865,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 859428454}
     m_Modifications:
+    - target: {fileID: 2562718069983127008, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+      propertyPath: button.m_key
+      value: Fire1
+      objectReference: {fileID: 0}
     - target: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_Name
       value: PlayerControllers

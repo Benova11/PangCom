@@ -7,9 +7,12 @@ namespace Game
     {
         #region Consts
 
-        private const string SHOOT_REQUEST_AXIS_NAME = "Shoot";
+        //keyboard input
+        //p1 right left : arrows, shoot right ctrl
+        //p2 right left : wasd, shoot right aly
+        
+        private const string SHOOT_REQUEST_AXIS_NAME = "Fire";
         private const string HORIZONTAL_AXIS_NAME = "Horizontal";
-        private const KeyCode TOGGLE_PAUSE_GAME = KeyCode.Escape;
         private const KeyCode SWITCH_WEAPON_REQUEST_BUTTON = KeyCode.RightControl;
 
         #endregion
@@ -29,11 +32,6 @@ namespace Game
         public static bool IsSwitchWeaponRequested()
         {
             return false;
-        }
-
-        public static bool IsToggleRequested()
-        {
-            return Input.GetKeyDown(TOGGLE_PAUSE_GAME);
         }
 
         #endregion

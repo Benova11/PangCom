@@ -44,7 +44,6 @@ namespace Utils.Storage
 
         private void SaveInternal(string serializedSnapshot)
         {
-            Debug.Log(Application.persistentDataPath);
             File.WriteAllText(_targetFilePath, serializedSnapshot);
         }
 

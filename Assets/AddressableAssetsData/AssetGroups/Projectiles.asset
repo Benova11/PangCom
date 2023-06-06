@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 704163c2bb07941a580227dec4544a79
-    m_Address: Assets/Prefabs/ProjectileSmall.prefab
+    m_Address: Assets/Prefabs/TimedExpandingProjectile.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

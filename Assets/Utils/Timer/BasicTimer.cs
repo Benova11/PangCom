@@ -14,7 +14,7 @@ namespace Utils.Timer
         #region Properties
 
         public bool IsRunning { private set; get; }
-        protected bool IsPaused { private set; get; } = true;
+        protected bool IsPaused { private set; get; }
         public int CurrentTime { protected set; get; }
 
         #endregion
