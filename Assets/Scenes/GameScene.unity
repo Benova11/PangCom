@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 550
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.y
@@ -724,7 +724,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 500
+  m_Spacing: 400
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -870,6 +870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerControllers
       objectReference: {fileID: 0}
+    - target: {fileID: 8131544762111398909, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -900,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 550
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 8575499713540613010, guid: 73854a4e35fb44d3b965e14fdf277b42, type: 3}
       propertyPath: m_SizeDelta.y

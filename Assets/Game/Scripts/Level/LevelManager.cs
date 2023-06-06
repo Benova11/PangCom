@@ -86,7 +86,10 @@ public class LevelManager : MonoBehaviour
 
     private async UniTask<List<Ball>> HandleBallPopped(DestroyBallEventArgs destroyBallEventArgs)
     {
-        return _currentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
+        var newCurrentBalls = await _ballPoppingHandler.HandleBallPopped(_currentBalls, destroyBallEventArgs);
+        _currentBalls.Remove(destroyBallEventArgs.Ball);
+        
+        return newCurrentBalls;
     }
 
     private void OnTimerTick(int remainingTime)
