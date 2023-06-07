@@ -1,4 +1,5 @@
-using Game.Models;
+using Game.Configs.Levels;
+using Game.Events;
 using TMPro;
 using UnityEngine;
 
@@ -8,40 +9,21 @@ namespace Game.Scripts.Hud
     {
         [SerializeField] private TextMeshProUGUI _score;
         [SerializeField] private TextMeshProUGUI _remainingTimeText;
-        [SerializeField] private GameManagerModel _gameManagerModel;
 
-        [SerializeField] private LevelModel _currentLevelModel;
-
-        public void InitStatsHud(LevelModel currentLevelModel)
+        private void Start()
         {
-            // SubscribeToNewLevel(currentLevelModel);
+            GameplayEventBus<GameplayEventType, LevelStatsUpdatedArgs>.Subscribe(GameplayEventType.LevelStatsUpdated, OnLevelModelUpdated);
         }
 
-        private void SubscribeToNewLevel(LevelModel currentLevel)
+        private void OnLevelModelUpdated(LevelStatsUpdatedArgs args)
         {
-            // if (_currentLevelModel != null)
-            // {
-            //     currentLevel.LevelModelUpdated -= OnLevelModelUpdated;
-            // }
-
-            // _currentLevelModel = currentLevel;
-            // Debug.Log("Subscribing to "+ _currentLevelModel.LevelIndex + "time :" + _currentLevelModel.TimePerLevel);
-            _currentLevelModel.LevelModelUpdated += OnLevelModelUpdated;
-            _remainingTimeText.text = "Remaining Time :" + 0;
-        }
-
-        private void OnLevelModelUpdated()
-        {
-            Debug.Log("level hud updated with score" + _currentLevelModel.CurrentScore);
-            Debug.Log("level hud updated with time" + _currentLevelModel.RemainingTime);
-
-            _score.text = "Score :" + _currentLevelModel.CurrentScore;
-            _remainingTimeText.text = "Remaining Time :" + _currentLevelModel.RemainingTime;
+            _score.text = "Score :" + args.Score;
+            _remainingTimeText.text = "Remaining Time :" + args.RemainingTime;
         }
 
         private void OnDestroy()
         {
-            _gameManagerModel.CurrentLevel.LevelModelUpdated -= OnLevelModelUpdated;
+            GameplayEventBus<GameplayEventType, LevelStatsUpdatedArgs>.Unsubscribe(GameplayEventType.LevelStatsUpdated, OnLevelModelUpdated);
         }
     }
 }

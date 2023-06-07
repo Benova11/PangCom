@@ -7,7 +7,6 @@ using Game.Configs.Screens.LeaderboardPopup;
 using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
-using Game.Scripts.Hud;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -21,12 +20,12 @@ namespace Game.Scripts
 
         [SerializeField] private Player[] _playerPrefabs;
         [SerializeField] private GameManagerModel _gameManagerModel;
-        [SerializeField] private LevelStatsHudDisplayView _levelStatsHudDisplayView;
 
         #endregion
 
         #region Fields
 
+        private int _currentSessionScore;
         private LevelManager _currentLevel;
         private List<Player> _currentPlayers;
         private LeaderboardStorageSystem _leaderboardStorageSystem;
@@ -37,14 +36,12 @@ namespace Game.Scripts
 
         private void Start()
         {
-            Time.timeScale = 1;
             Application.targetFrameRate = 60;
 
-            _gameManagerModel.CurrentPlayerScore = 0;
             _leaderboardStorageSystem = new LeaderboardStorageSystem();
-            
+
             InitializeLevel();
-            
+
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Subscribe(GameplayEventType.NextLevelRequested, OnNextLevelRequested);
             GameplayEventBus<GameplayEventType, PlayerDeadEventArgs>.Subscribe(GameplayEventType.PlayerDead, OnPlayerDead);
         }
@@ -52,11 +49,8 @@ namespace Game.Scripts
         private async UniTask InitializeLevel()
         {
             await CreateLevel();
-            
-            _gameManagerModel.CurrentLevel.ResetLevel();
-            _levelStatsHudDisplayView.InitStatsHud(_gameManagerModel.CurrentLevel);
 
-            CreatePlayers();
+            CreatePlayersInstances();
         }
 
         private async UniTask CreateLevel()
@@ -68,12 +62,18 @@ namespace Game.Scripts
             _currentLevel.LevelEnded += OnCurrentLevelEnded;
         }
 
-        private void CreatePlayers()
+        private void CreatePlayersInstances()
         {
             _currentPlayers ??= new List<Player>();
 
             var playersToCreate = (int)_gameManagerModel.GameMode - _currentPlayers.Count;
 
+            HandlePlayersInstancesCreation(playersToCreate);
+            SetPlayersData();
+        }
+
+        private void HandlePlayersInstancesCreation(int playersToCreate)
+        {
             for (int i = 0; i < playersToCreate; i++)
             {
                 if (playersToCreate > 1)
@@ -89,9 +89,17 @@ namespace Game.Scripts
                     else
                     {
                         CreatePlayerInstance(i);
-
                     }
                 }
+            }
+        }
+
+        private void SetPlayersData()
+        {
+            foreach (var player in _currentPlayers)
+            {
+                player.InitialWeapon(_currentLevel.SupportedAmmos);
+                player.SetInitialHealth(_gameManagerModel.CurrentLevel.InitialPlayerHealth);
             }
         }
 
@@ -105,9 +113,6 @@ namespace Game.Scripts
             var player = Instantiate(_playerPrefabs[prefabIndex]);
 
             player.gameObject.SetActive(true);
-            player.InitialWeapon(_currentLevel.SupportedAmmos);
-            player.SetInitialHealth(_gameManagerModel.CurrentLevel.InitialPlayerHealth);
-
             _currentPlayers.Add(player);
         }
 
@@ -123,29 +128,25 @@ namespace Game.Scripts
 
         private async void OnCurrentLevelEnded(EndLevelResult endLevelResult)
         {
-            Time.timeScale = 0;
-
             var popupManager = await PopupManagerLocator.Get();
             await popupManager.CreateEndLevelPopup(endLevelResult);
 
             if (endLevelResult.IsSuccess)
             {
-                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score, DateTime.Now.ToShortDateString()));
+                _currentSessionScore += endLevelResult.Score;
             }
             else
             {
-                _gameManagerModel.CurrentPlayerScore = 0;
+                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(_currentSessionScore, DateTime.Now.ToShortDateString()));
             }
         }
 
         private async void OnNextLevelRequested(NextLevelEventArgs args)
         {
-            Destroy(_currentLevel.gameObject);
+            Addressables.ReleaseInstance(_currentLevel.gameObject);
             _gameManagerModel.UpdateNextLevel();
 
             await InitializeLevel();
-
-            Time.timeScale = 1;
         }
 
         public void OnQuitToMenuClicked()

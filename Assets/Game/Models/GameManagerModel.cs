@@ -16,9 +16,7 @@ namespace Game.Models
         #endregion
 
         #region Properties
-
-        public int CurrentPlayerScore { get; set; }
-
+        
         public LevelModel CurrentLevel => _currentLevel;
 
         public GameMode GameMode
@@ -34,10 +32,12 @@ namespace Game.Models
         public void UpdateNextLevel()
         {
             var nextLevelIndex = _currentLevel.LevelIndex + 1;
+            if (nextLevelIndex > _supportedLevelsModels.Count)
+            {
+                nextLevelIndex = 1;
+            }
 
-            _currentLevel = nextLevelIndex < _supportedLevelsModels.Count
-                ? _supportedLevelsModels[nextLevelIndex - 1]
-                : _supportedLevelsModels[0];
+            _currentLevel = _supportedLevelsModels[nextLevelIndex - 1];
         }
 
         #endregion

@@ -41,6 +41,8 @@ namespace Game.Scripts
             {
                 _countDownTimer.StopTimer();
             }
+
+            _countDownTimer = null;
         }
 
 

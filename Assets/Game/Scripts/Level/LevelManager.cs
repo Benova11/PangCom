@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
 
     const int Z_POSITIONS = 0;
 
+    private int _currentScore;
     private CountDownTimer _countDownTimer;
     private List<IDestroyable> _collectables;
     private BallPoppingHandler _ballPoppingHandler;
@@ -55,7 +56,10 @@ public class LevelManager : MonoBehaviour
         AdjustZPosition();
         InitializeTimer();
 
+        GameplayEventBus<GameplayEventType, LevelStatsUpdatedArgs>.Publish(GameplayEventType.LevelStatsUpdated, new LevelStatsUpdatedArgs(0, 0));
+
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
     }
 
@@ -80,7 +84,8 @@ public class LevelManager : MonoBehaviour
 
         if (_currentBalls.Count == 0)
         {
-            LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, true, _levelModel.LevelIndex));
+            StopTimer();
+            LevelEnded?.Invoke(new EndLevelResult(_currentScore, true, _levelModel.LevelIndex));
         }
     }
 
@@ -92,20 +97,31 @@ public class LevelManager : MonoBehaviour
 
     private void OnTimerTick(int remainingTime)
     {
-        _levelModel.UpdateLevelTime(remainingTime);
+        GameplayEventBus<GameplayEventType, LevelStatsUpdatedArgs>.Publish(GameplayEventType.LevelStatsUpdated, new LevelStatsUpdatedArgs(_currentScore, remainingTime));
     }
 
     private void OnTimesUp()
     {
-        LevelEnded?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
+        LevelEnded?.Invoke(new EndLevelResult(_currentScore, false, _levelModel.LevelIndex));
+    }
+
+    private void OnRewardCollected(CollectableEventContent<RewardContent> content)
+    {
+        _currentScore += content.Args.Amount;
+        GameplayEventBus<GameplayEventType, LevelStatsUpdatedArgs>.Publish(GameplayEventType.LevelStatsUpdated, new LevelStatsUpdatedArgs(_currentScore, _countDownTimer.CurrentTime));
     }
 
     public void OnPlayersDead(Action<EndLevelResult> onLevelEndedCallback)
     {
-        DestroyBallsLeft();
-        DestroyObstaclesLeft();
-        DestroyCollectableLeft();
-        onLevelEndedCallback?.Invoke(new EndLevelResult(_levelModel.CurrentScore, false, _levelModel.LevelIndex));
+        StopTimer();
+        onLevelEndedCallback?.Invoke(new EndLevelResult(_currentScore, false, _levelModel.LevelIndex));
+    }
+
+    private void StopTimer()
+    {
+        _countDownTimer.TimesUp -= OnTimesUp;
+        _countDownTimer.TimerTick -= OnTimerTick;
+        _countDownTimer.StopTimer();
     }
 
     private void OnCollectableCreated(CollectableEventContent<RewardContent> content)
@@ -114,7 +130,7 @@ public class LevelManager : MonoBehaviour
         collectable.Destroyed += OnCollectableCollected;
         _collectables.Add(content.Args.Destroyable);
     }
-    
+
     private void OnCollectableCollected(IDestroyable reward)
     {
         _collectables.Remove(reward);
@@ -124,37 +140,50 @@ public class LevelManager : MonoBehaviour
     {
         if (_obstacles == null) return;
 
-        foreach (var obstacle in _obstacles)
+        for (int i = _obstacles.Count - 1; i >= 0; i--)
         {
+            var obstacle = _obstacles[i];
+
             if (obstacle != null)
             {
                 Destroy(obstacle.gameObject);
             }
         }
+
+        _obstacles.Clear();
     }
 
     private void DestroyCollectableLeft()
     {
         if (_collectables == null) return;
 
-        foreach (var collectable in _collectables)
+        for (int i = _collectables.Count - 1; i >= 0; i--)
         {
-            collectable.Destroyed -= OnCollectableCollected;
-            collectable.DestroySelf();
+            var collectable = _collectables[i];
+            if (collectable != null)
+            {
+                collectable.Destroyed -= OnCollectableCollected;
+                collectable.DestroySelf();
+            }
         }
+
+        _collectables.Clear();
     }
-    
+
     private void DestroyBallsLeft()
     {
         if (_currentBalls == null) return;
 
-        foreach (var ball in _currentBalls)
+        for (int i = _currentBalls.Count - 1; i >= 0; i--)
         {
-            if (ball.gameObject != null)
+            var ball = _currentBalls[i];
+            if (ball != null)
             {
                 Destroy(ball.gameObject);
             }
         }
+
+        _currentBalls.Clear();
     }
 
     private void OnDestroy()
@@ -162,7 +191,14 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
 
+        _countDownTimer = null;
+
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
+        GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
+
+        DestroyBallsLeft();
+        DestroyObstaclesLeft();
+        DestroyCollectableLeft();
     }
 }

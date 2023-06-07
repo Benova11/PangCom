@@ -65,7 +65,7 @@ namespace Game.Scripts
             {
                 throw new Exception("No supported ammo found");
             }
-            
+
             _supportedAmmo = supportedAmmo;
             _weaponManager = new WeaponManager(new Weapon(_projectileOriginTransform,_supportedAmmo[0]), supportedAmmo);
         }

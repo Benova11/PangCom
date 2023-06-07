@@ -26,7 +26,6 @@ namespace Game.Scripts.Collectables
         {
             CreateFactories();
             GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Subscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
-            GameplayEventBus<CollectableEventType,CollectableEventContent<RewardContent>>.Subscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         }
         
         private void CreateFactories()
@@ -51,16 +50,10 @@ namespace Game.Scripts.Collectables
                 GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Publish(CollectableEventType.CollectableCreated, new CollectableEventContent<RewardContent>(scoreReward.Content));
             }
         }
-        
-        private void OnRewardCollected(CollectableEventContent<RewardContent> content)
-        {
-            _gameManager.CurrentLevel.AddToLevelScore(content.Args.Amount);
-        }
 
         private void OnDestroy()
         {
             GameplayEventBus<GameplayEventType,DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallDestroyed);
-            GameplayEventBus<CollectableEventType,CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.RewardCollected, OnRewardCollected);
         }
 
         #endregion

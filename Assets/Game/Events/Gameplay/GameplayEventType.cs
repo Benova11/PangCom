@@ -5,6 +5,7 @@ namespace Game.Events
         PlayerDead,
         BallDestroyed,
         ObstacleDestroyed,
-        NextLevelRequested
+        NextLevelRequested,
+        LevelStatsUpdated
     }
 }

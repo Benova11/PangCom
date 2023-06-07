@@ -7,13 +7,15 @@ namespace Game.Scripts.Collectables.Rewards
 {
     public class ScoreReward : Collectable<RewardContent>
     {
+        private bool _isDestroyed;
+        
         public override RewardContent Content { get; set; }
 
         public override event Action<IDestroyable> Destroyed;
 
         public override void DestroySelf()
         {
-            if (gameObject != null)
+            if (!_isDestroyed)
             {
                 Destroy(gameObject);
             }
@@ -21,6 +23,8 @@ namespace Game.Scripts.Collectables.Rewards
 
         protected override void OnCollisionEnter2D(Collision2D other)
         {
+            _isDestroyed = true;
+            
             other.gameObject.TryGetComponent(out Player player);
 
             if (player != null)
