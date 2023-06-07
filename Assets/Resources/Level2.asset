@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c52f4d0f0cee445db4d4bd05b70dd808, type: 3}
-  m_Name: Level1
+  m_Name: Level2
   m_EditorClassIdentifier: 
-  _levelIndex: 1
-  _currentScore: 100
-  _remainingTime: 197
+  _levelIndex: 2
+  _currentScore: 0
+  _remainingTime: 135
   _initialPlayerHealth: 3
-  _timePerLevelSeconds: 200
+  _timePerLevelSeconds: 150
   _supportedAmmos:
   - {fileID: 7244894031786008088, guid: 9c5cc62cd593c447f8a6f762aa8814af, type: 3}
-  _rewardsChanceRate: 3
+  _rewardsChanceRate: 4

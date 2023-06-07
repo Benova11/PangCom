@@ -12,7 +12,7 @@ namespace Utils.Storage
     {
         #region Fields
 
-        private const string LEADERBOARD_FILE_NAME = "leaderboard_data.json";
+        private const string LEADERBOARD_FILE_NAME = "leaderboard_data.txt";
 
         private readonly string _targetFilePath;
         private readonly string _defaultDataSerialized;
@@ -24,7 +24,7 @@ namespace Utils.Storage
 
         public LeaderboardStorageSystem()
         {
-            _targetFilePath = Path.Combine(Application.streamingAssetsPath, LEADERBOARD_FILE_NAME); //LEADERBOARD_FILE_NAME; //;Path.Combine(Application.persistentDataPath, LEADERBOARD_FILE_NAME);
+            _targetFilePath = Path.Combine(Application.persistentDataPath, LEADERBOARD_FILE_NAME);
             _defaultDataSerialized = JsonConvert.SerializeObject(_players);
         }
 
@@ -47,15 +47,13 @@ namespace Utils.Storage
             File.WriteAllText(_targetFilePath, serializedSnapshot);
         }
 
-
         public async UniTask<List<LeaderboardPlayer>> Load()
         {
-            string filePath = _targetFilePath;
             ValidateFileExists();
 #if UNITY_ANDROID && !UNITY_EDITOR
-            await LeaderboardFileFromAndroid(filePath);
+            await LeaderboardFileFromAndroid(_targetFilePath);
 #else
-            await LoadChatFileFromIOS(filePath);
+            await LoadChatFileFromIOS(_targetFilePath);
 #endif
             return _players;
         }

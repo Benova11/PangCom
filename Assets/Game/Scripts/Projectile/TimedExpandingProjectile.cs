@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utils.Timer;
 
@@ -29,8 +30,17 @@ namespace Game.Scripts
 
         private void OnTimesUp()
         {
-            _countDownTimer.TimesUp -= OnTimesUp;
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _countDownTimer.TimesUp -= OnTimesUp;
+            
+            if (!_countDownTimer.IsTimesUp)
+            {
+                _countDownTimer.StopTimer();
+            }
         }
 
 

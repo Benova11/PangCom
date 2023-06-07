@@ -10,24 +10,33 @@ namespace Game.Scripts.Hud
         [SerializeField] private TextMeshProUGUI _remainingTimeText;
         [SerializeField] private GameManagerModel _gameManagerModel;
 
-        private void Start()
+        [SerializeField] private LevelModel _currentLevelModel;
+
+        public void InitStatsHud(LevelModel currentLevelModel)
         {
-            _gameManagerModel.LevelChanged += SubscribeToNewLevel;
-            SubscribeToNewLevel(_gameManagerModel.CurrentLevel);
+            // SubscribeToNewLevel(currentLevelModel);
         }
 
-        private void SubscribeToNewLevel(LevelModel newLevel)
+        private void SubscribeToNewLevel(LevelModel currentLevel)
         {
-            _gameManagerModel.CurrentLevel.LevelModelUpdated -= OnLevelModelUpdated;
-            
-            newLevel.LevelModelUpdated += OnLevelModelUpdated;
-            _remainingTimeText.text = "Remaining Time :" + _gameManagerModel.CurrentLevel.RemainingTime;
+            // if (_currentLevelModel != null)
+            // {
+            //     currentLevel.LevelModelUpdated -= OnLevelModelUpdated;
+            // }
+
+            // _currentLevelModel = currentLevel;
+            // Debug.Log("Subscribing to "+ _currentLevelModel.LevelIndex + "time :" + _currentLevelModel.TimePerLevel);
+            _currentLevelModel.LevelModelUpdated += OnLevelModelUpdated;
+            _remainingTimeText.text = "Remaining Time :" + 0;
         }
 
         private void OnLevelModelUpdated()
         {
-            _score.text = "Score :" + _gameManagerModel.CurrentLevel.CurrentScore;
-            _remainingTimeText.text = "Remaining Time :" + _gameManagerModel.CurrentLevel.RemainingTime;
+            Debug.Log("level hud updated with score" + _currentLevelModel.CurrentScore);
+            Debug.Log("level hud updated with time" + _currentLevelModel.RemainingTime);
+
+            _score.text = "Score :" + _currentLevelModel.CurrentScore;
+            _remainingTimeText.text = "Remaining Time :" + _currentLevelModel.RemainingTime;
         }
 
         private void OnDestroy()

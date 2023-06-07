@@ -162,10 +162,6 @@ public class LevelManager : MonoBehaviour
         _countDownTimer.TimesUp -= OnTimesUp;
         _countDownTimer.TimerTick -= OnTimerTick;
 
-        // DestroyBallsLeft();
-        // DestroyObstaclesLeft();
-        // DestroyCollectableLeft();
-        
         GameplayEventBus<GameplayEventType, DestroyBallEventArgs>.Unsubscribe(GameplayEventType.BallDestroyed, OnBallPopped);
         GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Unsubscribe(CollectableEventType.CollectableCreated, OnCollectableCreated);
     }

@@ -26,8 +26,8 @@ namespace Game.Scripts.Collectables.Rewards
             if (player != null)
             {
                 GameplayEventBus<CollectableEventType, CollectableEventContent<RewardContent>>.Publish(CollectableEventType.RewardCollected, new CollectableEventContent<RewardContent>(Content));
+                
                 Destroyed?.Invoke(this);
-
                 Destroy(gameObject);
             }
         }

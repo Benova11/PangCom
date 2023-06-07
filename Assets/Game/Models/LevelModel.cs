@@ -23,13 +23,9 @@ namespace Game.Models
         #region Properties
 
         public int LevelIndex => _levelIndex;
-
         public int TimePerLevel => _timePerLevelSeconds;
-
         public int CurrentScore => _currentScore;
-
         public int RemainingTime => _remainingTime;
-
         public int RewardsChanceRate => _rewardsChanceRate;
         public int InitialPlayerHealth => _initialPlayerHealth;
         public List<Projectile> SupportedAmmos => _supportedAmmos;
@@ -46,20 +42,17 @@ namespace Game.Models
 
         public void AddToLevelScore(int score)
         {
-            _currentScore = score;
+            Debug.Log($"Score: {_currentScore}");
+            _currentScore += score;
+            if(LevelModelUpdated == null) Debug.Log("LevelModelUpdated is null");
             LevelModelUpdated?.Invoke();
         }
         
         public void UpdateLevelTime(int time)
         {
+            Debug.Log($"UpdateLevelTime: {time}");
             _remainingTime = time;
-            LevelModelUpdated?.Invoke();
-        }
-
-        #endregion
-
-        public void OnLevelModeUpdated()
-        {
+            if(LevelModelUpdated == null) Debug.Log("LevelModelUpdated is null");
             LevelModelUpdated?.Invoke();
         }
 
@@ -67,5 +60,9 @@ namespace Game.Models
         {
             _currentScore = 0;
         }
+
+        #endregion
+
+
     }
 }

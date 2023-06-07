@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
@@ -6,6 +7,7 @@ using Game.Configs.Screens.LeaderboardPopup;
 using Game.Events;
 using Game.Infrastructures.Popups;
 using Game.Models;
+using Game.Scripts.Hud;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -19,6 +21,7 @@ namespace Game.Scripts
 
         [SerializeField] private Player[] _playerPrefabs;
         [SerializeField] private GameManagerModel _gameManagerModel;
+        [SerializeField] private LevelStatsHudDisplayView _levelStatsHudDisplayView;
 
         #endregion
 
@@ -35,6 +38,7 @@ namespace Game.Scripts
         private void Start()
         {
             Time.timeScale = 1;
+            Application.targetFrameRate = 60;
 
             _gameManagerModel.CurrentPlayerScore = 0;
             _leaderboardStorageSystem = new LeaderboardStorageSystem();
@@ -48,6 +52,9 @@ namespace Game.Scripts
         private async UniTask InitializeLevel()
         {
             await CreateLevel();
+            
+            _gameManagerModel.CurrentLevel.ResetLevel();
+            _levelStatsHudDisplayView.InitStatsHud(_gameManagerModel.CurrentLevel);
 
             CreatePlayers();
         }
@@ -59,7 +66,6 @@ namespace Game.Scripts
 
             _currentLevel = levelManager;
             _currentLevel.LevelEnded += OnCurrentLevelEnded;
-            _gameManagerModel.CurrentLevel.ResetLevel();
         }
 
         private void CreatePlayers()
@@ -74,9 +80,17 @@ namespace Game.Scripts
                 {
                     CreatePlayerInstance(i);
                 }
-                else if(_gameManagerModel.GameMode == GameMode.TwoPlayers)
+                else
                 {
-                    RevivePlayerForNextLevel();
+                    if (_gameManagerModel.GameMode == GameMode.TwoPlayers)
+                    {
+                        RevivePlayerForNextLevel();
+                    }
+                    else
+                    {
+                        CreatePlayerInstance(i);
+
+                    }
                 }
             }
         }
@@ -116,8 +130,7 @@ namespace Game.Scripts
 
             if (endLevelResult.IsSuccess)
             {
-                _gameManagerModel.CurrentPlayerScore += endLevelResult.Score;
-                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score, "No Unique Id"));
+                await _leaderboardStorageSystem.Save(new LeaderboardPlayer(endLevelResult.Score, DateTime.Now.ToShortDateString()));
             }
             else
             {
