@@ -1,10 +1,13 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Configs.Levels;
 using Game.Events;
+using Game.Infrastructures.Popups;
 using Screens.Scripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -45,13 +48,15 @@ namespace Game.Screens.Popups
 
         public override void ClosePopup()
         {
-            Destroy(gameObject);
+            PopupManagerLocator.Unload();
+            Addressables.ReleaseInstance(gameObject);
+
         }
 
         public void OnQuitClicked()
         {
-            ClosePopup();
             SceneManager.LoadSceneAsync(SystemSceneIndexes.MAIN_MENU_BUILD_ID);
+            ClosePopup();
         }
 
         public void OnNextLevelClicked()
@@ -60,7 +65,7 @@ namespace Game.Screens.Popups
             GameplayEventBus<GameplayEventType, NextLevelEventArgs>.Publish(GameplayEventType.NextLevelRequested, nextLevelEventArgs);
             ClosePopup();
         }
-
+        
         #endregion
     }
 }

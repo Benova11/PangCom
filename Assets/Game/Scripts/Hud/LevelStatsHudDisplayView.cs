@@ -17,8 +17,8 @@ namespace Game.Scripts.Hud
 
         private void OnLevelModelUpdated(LevelStatsUpdatedArgs args)
         {
-            _score.text = "Score :" + args.Score;
-            _remainingTimeText.text = "Remaining Time :" + args.RemainingTime;
+            _score.text = "Score : " + args.Score;
+            _remainingTimeText.text = "Remaining Time : " + args.RemainingTime;
         }
 
         private void OnDestroy()

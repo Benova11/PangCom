@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelIndex: 1
   _initialPlayerHealth: 3
-  _timePerLevelSeconds: 200
+  _timePerLevelSeconds: 120
   _supportedAmmos:
   - {fileID: 7244894031786008088, guid: 9c5cc62cd593c447f8a6f762aa8814af, type: 3}
-  _rewardsChanceRate: 3
+  _rewardsChanceRate: 2

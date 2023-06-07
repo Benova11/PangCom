@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Infrastructures.Popups;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Screens.Scripts
 {
@@ -22,6 +23,7 @@ namespace Screens.Scripts
 
         public override void ClosePopup()
         {
+            Addressables.ReleaseInstance(gameObject);
             PopupManagerLocator.Unload();
         }
     }
